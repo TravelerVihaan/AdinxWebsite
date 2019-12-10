@@ -12,7 +12,7 @@
     <artifactId>adinxwebsite</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>AdinxWebsite</name>
-    <description>Web service for Sista Arienna</description>
+    <description>Web service for Sista Adrienna</description>
 
     <properties>
         <java.version>13</java.version>

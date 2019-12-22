@@ -2,6 +2,7 @@ package com.github.vihaan.adinxwebsite.trips;
 
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -15,14 +16,13 @@ public class TripDTO {
     @Future
     private LocalDate end_date;
 
-    @NotEmpty
-    private String destination;
+    @NotNull
+    private DestinationDTO destination;
 
     public TripDTO() { }
-    public TripDTO(@NotEmpty @Future LocalDate start_date, @NotEmpty @Future LocalDate end_date, @NotEmpty String destination) {
+    public TripDTO(@NotEmpty @Future LocalDate start_date, @NotEmpty @Future LocalDate end_date) {
         this.start_date = start_date;
         this.end_date = end_date;
-        this.destination = destination;
     }
 
     public LocalDate getStart_date() {
@@ -41,11 +41,11 @@ public class TripDTO {
         this.end_date = end_date;
     }
 
-    public String getDestination() {
+    public DestinationDTO getDestination() {
         return destination;
     }
 
-    public void setDestination(String destination) {
+    public void setDestination(DestinationDTO destination) {
         this.destination = destination;
     }
 
@@ -69,7 +69,7 @@ public class TripDTO {
         return "TripDTO{" +
                 "start_date=" + start_date +
                 ", end_date=" + end_date +
-                ", destination='" + destination + '\'' +
+                ", destination=" + destination +
                 '}';
     }
 }

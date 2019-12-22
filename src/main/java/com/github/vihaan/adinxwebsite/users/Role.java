@@ -1,6 +1,7 @@
 package com.github.vihaan.adinxwebsite.users;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,6 +14,9 @@ public class Role {
     private Long id;
     @Column(nullable = false, unique = true)
     private String role;
+
+    @ManyToMany(mappedBy = "roles")
+    private List<User> users;
 
     public Role(){}
     public Role(String role){

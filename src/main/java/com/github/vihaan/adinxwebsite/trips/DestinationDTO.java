@@ -1,14 +1,15 @@
 package com.github.vihaan.adinxwebsite.trips;
 
-import lombok.*;
-
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 import java.util.Objects;
 
 public class DestinationDTO {
 
     @NotEmpty
     private String destination;
+
+    private List<TripDTO> trips;
 
     public DestinationDTO() {}
     public DestinationDTO(@NotEmpty String destination) {
@@ -21,6 +22,14 @@ public class DestinationDTO {
 
     public void setDestination(String destination) {
         this.destination = destination;
+    }
+
+    public List<TripDTO> getTrips() {
+        return trips;
+    }
+
+    public void setTrips(List<TripDTO> trips) {
+        this.trips = trips;
     }
 
     @Override
@@ -40,6 +49,7 @@ public class DestinationDTO {
     public String toString() {
         return "DestinationDTO{" +
                 "destination='" + destination + '\'' +
+                ", trips=" + trips +
                 '}';
     }
 }

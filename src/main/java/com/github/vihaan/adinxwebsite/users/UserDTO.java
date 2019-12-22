@@ -3,6 +3,7 @@ package com.github.vihaan.adinxwebsite.users;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Objects;
+import java.util.Set;
 
 public class UserDTO {
 
@@ -12,6 +13,8 @@ public class UserDTO {
     @NotEmpty
     @Size(min = 8, max = 30)
     private String password;
+
+    private Set<RoleDTO> roles;
 
     public UserDTO() { }
     public UserDTO(@NotEmpty String username, @NotEmpty @Size(min = 8, max = 30) String password) {
@@ -35,6 +38,14 @@ public class UserDTO {
         this.password = password;
     }
 
+    public Set<RoleDTO> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<RoleDTO> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -51,6 +62,8 @@ public class UserDTO {
     @Override
     public String toString() {
         return "UserDTO{" +
-                "username='" + username + '}';
+                "username='" + username + '\'' +
+                ", roles=" + roles +
+                '}';
     }
 }

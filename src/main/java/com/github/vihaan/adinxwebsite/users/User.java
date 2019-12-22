@@ -2,6 +2,7 @@ package com.github.vihaan.adinxwebsite.users;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -17,6 +18,14 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_role",
+            joinColumns = {@JoinColumn(name = "user_id",
+                    referencedColumnName = "id_user")},
+            inverseJoinColumns = {@JoinColumn(name="user_id",
+                    referencedColumnName = "id_user")})
+    private Set<Role> roles;
 
     public User() {}
     public User(String username, String password){
@@ -48,6 +57,14 @@ public class User {
         this.password = password;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -67,6 +84,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 }

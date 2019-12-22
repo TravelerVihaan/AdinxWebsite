@@ -1,24 +1,39 @@
 package com.github.vihaan.adinxwebsite.users;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class UserDTO {
 
     @NotEmpty
     private String username;
 
     @NotEmpty
+    @Size(min = 8, max = 30)
     private String password;
+
+    public UserDTO() { }
+    public UserDTO(@NotEmpty String username, @NotEmpty @Size(min = 8, max = 30) String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     @Override
     public boolean equals(Object o) {

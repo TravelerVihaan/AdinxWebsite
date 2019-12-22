@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
-@Qualifier("destinationValidation")
+@Qualifier("userValidation")
 public class UserValidation implements IValidation<UserDTO>{
 
     @Override

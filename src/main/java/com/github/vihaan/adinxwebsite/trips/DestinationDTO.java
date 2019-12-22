@@ -1,18 +1,17 @@
-package com.github.vihaan.adinxwebsite.users;
+package com.github.vihaan.adinxwebsite.trips;
 
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
-import java.util.Objects;
 
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
-public class RoleDTO {
+public class DestinationDTO {
 
     @NotEmpty
-    private String role;
+    private String destination;
 }

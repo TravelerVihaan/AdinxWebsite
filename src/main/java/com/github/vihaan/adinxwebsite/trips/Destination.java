@@ -3,6 +3,7 @@ package com.github.vihaan.adinxwebsite.trips;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,6 +21,9 @@ public class Destination {
 
     @Column(unique = true, nullable = false)
     private String destination;
+
+    @OneToMany(mappedBy= "tripDestination")
+    private List<Trip> trips;
 
     public Destination(){}
     public Destination(String destination) {

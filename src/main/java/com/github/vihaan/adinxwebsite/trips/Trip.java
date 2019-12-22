@@ -25,10 +25,11 @@ public class Trip {
     @Column(nullable = false)
     private LocalDate end_date;
 
-    @Column(name = "destination")
-    private String tripDestination;
+    @ManyToOne
+    @JoinColumn(name="destination_id")
+    private Destination tripDestination;
 
-    public Trip(LocalDate start_date, LocalDate end_date, String tripDestination) {
+    public Trip(LocalDate start_date, LocalDate end_date, Destination tripDestination) {
         this.start_date = start_date;
         this.end_date = end_date;
         this.tripDestination = tripDestination;

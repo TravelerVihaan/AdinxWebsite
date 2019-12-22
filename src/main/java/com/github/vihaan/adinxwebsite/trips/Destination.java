@@ -9,7 +9,6 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 @EqualsAndHashCode
 @Table(name = "destination")
 public class Destination {

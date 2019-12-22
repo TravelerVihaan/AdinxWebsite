@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 @Table(name = "roles")
 public class Role {
 
@@ -22,6 +21,7 @@ public class Role {
     @Column(nullable = false, unique = true)
     private String role;
 
+    public Role(){}
     public Role(String role){
         this.role = role;
     }

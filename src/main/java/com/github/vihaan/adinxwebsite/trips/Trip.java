@@ -10,7 +10,6 @@ import java.time.LocalDate;
 @Setter
 @ToString
 @EqualsAndHashCode
-@NoArgsConstructor
 @Table(name = "trips")
 public class Trip {
 
@@ -29,6 +28,7 @@ public class Trip {
     @JoinColumn(name="destination_id")
     private Destination tripDestination;
 
+    public Trip(){}
     public Trip(LocalDate start_date, LocalDate end_date, Destination tripDestination) {
         this.start_date = start_date;
         this.end_date = end_date;

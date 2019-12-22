@@ -1,16 +1,15 @@
 package com.github.vihaan.adinxwebsite.users;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "roles")
 public class Role {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_role")
     private Long id;
-    @NotEmpty
     @Column(nullable = false, unique = true)
     private String role;
 

@@ -1,6 +1,5 @@
 package com.github.vihaan.adinxwebsite.validation;
 
-import com.github.vihaan.adinxwebsite.httpstatus.HttpStatusEnum;
 import com.github.vihaan.adinxwebsite.trips.DestinationDTO;
 import com.github.vihaan.adinxwebsite.trips.DestinationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +17,7 @@ public class DestinationValidation implements IValidation<DestinationDTO> {
         this.destinationRepository = destinationRepository;
     }
 
-    public HttpStatusEnum isValid(DestinationDTO objectToValidate) {
-        if (!validatorCheck(objectToValidate))
-            return HttpStatusEnum.BADREQUEST;
-        if (destinationRepository.findByDestination(objectToValidate.getDestination()).isPresent())
-            return HttpStatusEnum.CONFLICT;
-        return HttpStatusEnum.CREATED;
+    public boolean isValid(DestinationDTO objectToValidate) {
+        return false;
     }
 }

@@ -1,4 +1,4 @@
-# AdinxWebsite
+# TripWebsite
 Web service designed for my friend's company
 
 ## Used technology stack

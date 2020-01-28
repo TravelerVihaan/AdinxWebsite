@@ -16,18 +16,21 @@ import java.util.stream.Collectors;
 @Qualifier("userMapper")
 public class UserMapper implements IMapper<User, UserDTO> {
 
+    private IMapper<Role, RoleDTO> roleMapper;
     private ModelMapper modelMapper;
 
     @Autowired
-    public UserMapper(ModelMapper modelMapper){
+    public UserMapper(@Qualifier("roleMapper") IMapper<Role, RoleDTO> roleMapper,
+                      ModelMapper modelMapper){
         this.modelMapper = modelMapper;
+        this.roleMapper = roleMapper;
     }
 
     @Override
     public UserDTO convertEntityToDto(User entity) {
         Set<RoleDTO> rolesDTO = entity.getRoles()
                 .stream()
-                .map(role -> modelMapper.map(role, RoleDTO.class))
+                .map(role -> roleMapper.convertEntityToDto(role))
                 .collect(Collectors.toSet());
         UserDTO userDTO = modelMapper.map(entity, UserDTO.class);
         userDTO.setRoles(rolesDTO);
@@ -39,6 +42,11 @@ public class UserMapper implements IMapper<User, UserDTO> {
         User user = new User();
         user.setUsername(dto.getUsername());
         user.setPassword(dto.getPassword());
-        Set<Role> roles = dto.getRoles().stream().map(roleDTO -> ) // TODO
+        Set<Role> roles = dto.getRoles()
+                .stream()
+                .map(roleDTO -> roleMapper.convertDtoToEntity(roleDTO))
+                .collect(Collectors.toSet());
+        user.setRoles(roles);
+        return user;
     }
 }

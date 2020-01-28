@@ -11,7 +11,7 @@
     <groupId>com.github.vihaan</groupId>
     <artifactId>tripswebsite</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>AdinxWebsite</name>
+    <name>TripsWebsite</name>
     <description>Web service for booking trips</description>
     <packaging>jar</packaging>
     <properties>

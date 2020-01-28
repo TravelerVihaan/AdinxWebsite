@@ -33,10 +33,14 @@ public class Trip {
     private Destination tripDestination;
 
     public Trip(){}
-    public Trip(LocalDate start_date, LocalDate end_date, Destination tripDestination) {
+    public Trip(LocalDate start_date, LocalDate end_date, Destination tripDestination,
+                String personName, int normalTickets, int reducedTickets) {
         this.start_date = start_date;
         this.end_date = end_date;
         this.tripDestination = tripDestination;
+        this.personName = personName;
+        this.normalTickets = normalTickets;
+        this.reducedTickets = reducedTickets;
     }
 
     public long getId() {

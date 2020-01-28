@@ -26,8 +26,10 @@ public class Destination {
     private List<Trip> trips;
 
     public Destination(){}
-    public Destination(String destination) {
+    public Destination(String destination, double normalPrice, double reducedPrice){
         this.destination = destination;
+        this.normalPrice = normalPrice;
+        this.reducedPrice = reducedPrice;
     }
 
     public long getId() {

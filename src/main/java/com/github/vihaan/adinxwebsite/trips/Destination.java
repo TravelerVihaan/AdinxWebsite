@@ -11,10 +11,16 @@ public class Destination {
     @Id
     @Column(name = "id_destination")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(unique = true, nullable = false)
     private String destination;
+
+    @Column(name = "normal_price", nullable = false)
+    private double normalPrice;
+
+    @Column(name = "reduced_price", nullable = false)
+    private double reducedPrice;
 
     @OneToMany(mappedBy= "tripDestination")
     private List<Trip> trips;
@@ -24,11 +30,11 @@ public class Destination {
         this.destination = destination;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -38,6 +44,22 @@ public class Destination {
 
     public void setDestination(String destination) {
         this.destination = destination;
+    }
+
+    public double getNormalPrice() {
+        return normalPrice;
+    }
+
+    public void setNormalPrice(double normalPrice) {
+        this.normalPrice = normalPrice;
+    }
+
+    public double getReducedPrice() {
+        return reducedPrice;
+    }
+
+    public void setReducedPrice(double reducedPrice) {
+        this.reducedPrice = reducedPrice;
     }
 
     public List<Trip> getTrips() {
@@ -53,14 +75,15 @@ public class Destination {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Destination that = (Destination) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(destination, that.destination) &&
-                Objects.equals(trips, that.trips);
+        return id == that.id &&
+                Double.compare(that.normalPrice, normalPrice) == 0 &&
+                Double.compare(that.reducedPrice, reducedPrice) == 0 &&
+                Objects.equals(destination, that.destination);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, destination, trips);
+        return Objects.hash(id, destination, normalPrice, reducedPrice);
     }
 
     @Override
@@ -68,7 +91,8 @@ public class Destination {
         return "Destination{" +
                 "id=" + id +
                 ", destination='" + destination + '\'' +
-                ", trips=" + trips +
+                ", normalPrice=" + normalPrice +
+                ", reducedPrice=" + reducedPrice +
                 '}';
     }
 }

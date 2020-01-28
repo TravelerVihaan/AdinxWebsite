@@ -11,13 +11,22 @@ public class Trip {
     @Id
     @Column(name = "id_trip")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(nullable = false)
     private LocalDate start_date;
 
     @Column(nullable = false)
     private LocalDate end_date;
+
+    @Column(name = "person_name", nullable = false)
+    private String personName;
+
+    @Column(name = "nomral_tickets", nullable = false)
+    private int normalTickets;
+
+    @Column(name = "reduced_tickets", nullable = false)
+    private int reducedTickets;
 
     @ManyToOne
     @JoinColumn(name="destination_id")
@@ -30,11 +39,11 @@ public class Trip {
         this.tripDestination = tripDestination;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -62,20 +71,47 @@ public class Trip {
         this.tripDestination = tripDestination;
     }
 
+    public String getPersonName() {
+        return personName;
+    }
+
+    public void setPersonName(String personName) {
+        this.personName = personName;
+    }
+
+    public int getNormalTickets() {
+        return normalTickets;
+    }
+
+    public void setNormalTickets(int normalTickets) {
+        this.normalTickets = normalTickets;
+    }
+
+    public int getReducedTickets() {
+        return reducedTickets;
+    }
+
+    public void setReducedTickets(int reducedTickets) {
+        this.reducedTickets = reducedTickets;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Trip trip = (Trip) o;
-        return Objects.equals(id, trip.id) &&
+        return id == trip.id &&
+                normalTickets == trip.normalTickets &&
+                reducedTickets == trip.reducedTickets &&
                 Objects.equals(start_date, trip.start_date) &&
                 Objects.equals(end_date, trip.end_date) &&
+                Objects.equals(personName, trip.personName) &&
                 Objects.equals(tripDestination, trip.tripDestination);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, start_date, end_date, tripDestination);
+        return Objects.hash(id, start_date, end_date, personName, normalTickets, reducedTickets, tripDestination);
     }
 
     @Override
@@ -84,6 +120,9 @@ public class Trip {
                 "id=" + id +
                 ", start_date=" + start_date +
                 ", end_date=" + end_date +
+                ", personName='" + personName + '\'' +
+                ", normalTickets=" + normalTickets +
+                ", reducedTickets=" + reducedTickets +
                 ", tripDestination=" + tripDestination +
                 '}';
     }

@@ -9,17 +9,33 @@ import java.util.Objects;
 public class TripDTO {
 
     @NotEmpty
-    @Future
     private LocalDate start_date;
-
     @NotEmpty
-    @Future
     private LocalDate end_date;
+    @NotEmpty
+    private String personName;
+    @NotNull
+    private int normalTickets;
+    @NotNull
+    private int reducedTickets;
 
     @NotNull
     private DestinationDTO destination;
 
     public TripDTO() { }
+
+    public TripDTO(@NotEmpty LocalDate start_date,
+                   @NotEmpty LocalDate end_date,
+                   @NotEmpty String personName,
+                   @NotNull int normalTickets,
+                   @NotNull int reducedTickets) {
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.personName = personName;
+        this.normalTickets = normalTickets;
+        this.reducedTickets = reducedTickets;
+    }
+
     public TripDTO(@NotEmpty @Future LocalDate start_date, @NotEmpty @Future LocalDate end_date) {
         this.start_date = start_date;
         this.end_date = end_date;
@@ -41,6 +57,18 @@ public class TripDTO {
         this.end_date = end_date;
     }
 
+    public String getPersonName() {
+        return personName;
+    }
+
+    public int getNormalTickets() {
+        return normalTickets;
+    }
+
+    public int getReducedTickets() {
+        return reducedTickets;
+    }
+
     public DestinationDTO getDestination() {
         return destination;
     }
@@ -54,14 +82,16 @@ public class TripDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TripDTO tripDTO = (TripDTO) o;
-        return Objects.equals(start_date, tripDTO.start_date) &&
+        return normalTickets == tripDTO.normalTickets &&
+                reducedTickets == tripDTO.reducedTickets &&
+                Objects.equals(start_date, tripDTO.start_date) &&
                 Objects.equals(end_date, tripDTO.end_date) &&
-                Objects.equals(destination, tripDTO.destination);
+                Objects.equals(personName, tripDTO.personName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(start_date, end_date, destination);
+        return Objects.hash(start_date, end_date, personName, normalTickets, reducedTickets);
     }
 
     @Override
@@ -69,6 +99,9 @@ public class TripDTO {
         return "TripDTO{" +
                 "start_date=" + start_date +
                 ", end_date=" + end_date +
+                ", personName='" + personName + '\'' +
+                ", normalTickets=" + normalTickets +
+                ", reducedTickets=" + reducedTickets +
                 ", destination=" + destination +
                 '}';
     }

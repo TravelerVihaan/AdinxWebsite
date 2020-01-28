@@ -1,6 +1,7 @@
 package com.github.vihaan.adinxwebsite.trips;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,9 +10,23 @@ public class DestinationDTO {
     @NotEmpty
     private String destination;
 
+    @NotNull
+    private double normalPrice;
+
+    @NotNull
+    private double reducedPrice;
+
     private List<TripDTO> trips;
 
-    public DestinationDTO() {}
+    public DestinationDTO(){}
+    public DestinationDTO(@NotEmpty String destination,
+                          @NotNull double normalPrice,
+                          @NotNull double reducedPrice) {
+        this.destination = destination;
+        this.normalPrice = normalPrice;
+        this.reducedPrice = reducedPrice;
+    }
+
     public DestinationDTO(@NotEmpty String destination) {
         this.destination = destination;
     }
@@ -22,6 +37,22 @@ public class DestinationDTO {
 
     public void setDestination(String destination) {
         this.destination = destination;
+    }
+
+    public double getNormalPrice() {
+        return normalPrice;
+    }
+
+    public void setNormalPrice(double normalPrice) {
+        this.normalPrice = normalPrice;
+    }
+
+    public double getReducedPrice() {
+        return reducedPrice;
+    }
+
+    public void setReducedPrice(double reducedPrice) {
+        this.reducedPrice = reducedPrice;
     }
 
     public List<TripDTO> getTrips() {
@@ -37,19 +68,22 @@ public class DestinationDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DestinationDTO that = (DestinationDTO) o;
-        return Objects.equals(destination, that.destination);
+        return Double.compare(that.normalPrice, normalPrice) == 0 &&
+                Double.compare(that.reducedPrice, reducedPrice) == 0 &&
+                Objects.equals(destination, that.destination);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(destination);
+        return Objects.hash(destination, normalPrice, reducedPrice);
     }
 
     @Override
     public String toString() {
         return "DestinationDTO{" +
                 "destination='" + destination + '\'' +
-                ", trips=" + trips +
+                ", normalPrice=" + normalPrice +
+                ", reducedPrice=" + reducedPrice +
                 '}';
     }
 }

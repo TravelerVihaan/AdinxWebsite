@@ -20,11 +20,11 @@ public class DestinationMapper implements IMapper<Destination, DestinationDTO>{
 
     @Override
     public DestinationDTO convertEntityToDto(Destination entity) {
-        return null;
+        return modelMapper.map(entity, DestinationDTO.class);
     }
 
     @Override
     public Destination convertDtoToEntity(DestinationDTO dto) {
-        return null;
+        return modelMapper.map(dto, Destination.class);
     }
 }

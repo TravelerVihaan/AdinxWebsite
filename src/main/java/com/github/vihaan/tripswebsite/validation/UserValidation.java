@@ -19,6 +19,9 @@ public class UserValidation implements IValidation<UserDTO>{
 
     @Override
     public boolean isValid(UserDTO objectToValidate) {
-        return false;
+        if(!validatorCheck(objectToValidate)){
+            return false;
+        }
+        return true;
     }
 }

@@ -18,6 +18,9 @@ public class DestinationValidation implements IValidation<DestinationDTO> {
     }
 
     public boolean isValid(DestinationDTO objectToValidate) {
-        return false;
+        if(!validatorCheck(objectToValidate)){
+            return false;
+        }
+        return true;
     }
 }

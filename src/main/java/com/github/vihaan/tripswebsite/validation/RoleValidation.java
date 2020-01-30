@@ -1,6 +1,5 @@
 package com.github.vihaan.tripswebsite.validation;
 
-import com.github.vihaan.tripswebsite.httpstatus.HttpStatusEnum;
 import com.github.vihaan.tripswebsite.users.RoleDTO;
 import com.github.vihaan.tripswebsite.users.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,10 @@ public class RoleValidation implements IValidation<RoleDTO>{
     }
 
     @Override
-    public HttpStatusEnum isValid(RoleDTO objectToValidate) {
-        return null;
+    public boolean isValid(RoleDTO objectToValidate) {
+        if(!validatorCheck(objectToValidate)){
+            return false;
+        }
+        return true;
     }
 }

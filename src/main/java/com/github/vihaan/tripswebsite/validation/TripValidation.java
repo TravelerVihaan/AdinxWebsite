@@ -19,6 +19,9 @@ public class TripValidation implements IValidation<TripDTO>{
 
     @Override
     public boolean isValid(TripDTO objectToValidate) {
-        return false;
+        if(!validatorCheck(objectToValidate)){
+            return false;
+        }
+        return true;
     }
 }

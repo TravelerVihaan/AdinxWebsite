@@ -20,7 +20,7 @@ public class UserMapper implements IMapper<User, UserDTO> {
     private ModelMapper modelMapper;
 
     @Autowired
-    public UserMapper(@Qualifier("roleMapper") IMapper<Role, RoleDTO> roleMapper,
+    public UserMapper(@Qualifier("roleMapper") IMapper roleMapper,
                       ModelMapper modelMapper){
         this.modelMapper = modelMapper;
         this.roleMapper = roleMapper;

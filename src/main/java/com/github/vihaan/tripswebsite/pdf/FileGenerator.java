@@ -1,6 +1,6 @@
 package com.github.vihaan.tripswebsite.pdf;
 
-public interface FileGenerator {
+public interface FileGenerator<T> {
 
-    void generate();
+    T generate();
 }

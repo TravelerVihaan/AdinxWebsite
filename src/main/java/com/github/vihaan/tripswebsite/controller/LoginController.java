@@ -11,6 +11,6 @@ public class LoginController {
     @GetMapping("/login")
     public String loginPage(@RequestParam(defaultValue = "false") String error, Model model) {
         model.addAttribute("error", error);
-        return "login";
+        return IControllersStrings.LOGIN;
     }
 }

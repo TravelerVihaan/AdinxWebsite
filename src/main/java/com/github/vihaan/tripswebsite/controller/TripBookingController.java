@@ -14,6 +14,6 @@ public class TripBookingController {
 
     @PostMapping
     public String executeBooking(){
-        return "book";
+        return IControllersStrings.PROCESS_BOOKING;
     }
 }

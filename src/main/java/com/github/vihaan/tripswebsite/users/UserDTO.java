@@ -8,6 +8,7 @@ import java.util.Set;
 public class UserDTO {
 
     @NotEmpty
+    @Size(min = 5, max = 30)
     private String username;
 
     @NotEmpty

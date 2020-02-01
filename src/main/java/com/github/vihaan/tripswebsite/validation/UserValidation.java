@@ -22,6 +22,10 @@ public class UserValidation implements IValidation<UserDTO>{
         if(!validatorCheck(objectToValidate)){
             return false;
         }
-        return true;
+        return !checkIfExistAlready(objectToValidate);
+    }
+
+    private boolean checkIfExistAlready(UserDTO user){
+        return userRepository.findByUsername(user.getUsername()).isPresent();
     }
 }

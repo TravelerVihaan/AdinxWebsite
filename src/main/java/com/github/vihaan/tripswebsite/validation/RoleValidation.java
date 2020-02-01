@@ -25,8 +25,8 @@ public class RoleValidation implements IValidation<RoleDTO>{
         return !checkIfExistAlready(objectToValidate);
     }
 
-    private boolean checkIfExistAlready(RoleDTO objectToValidate){
-        return roleRepository.findByRole(objectToValidate.getRole()).isPresent();
+    private boolean checkIfExistAlready(RoleDTO role){
+        return roleRepository.findByRole(role.getRole()).isPresent();
 
     }
 }

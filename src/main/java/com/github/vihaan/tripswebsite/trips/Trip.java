@@ -1,10 +1,12 @@
 package com.github.vihaan.tripswebsite.trips;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Entity
+@Document
 @Table(name = "trips")
 public class Trip {
 

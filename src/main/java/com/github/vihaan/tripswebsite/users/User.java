@@ -1,10 +1,12 @@
 package com.github.vihaan.tripswebsite.users;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
+@Document
 @Table(name = "users")
 public class User {
 

@@ -17,5 +17,6 @@ public class DestinationService {
 
     private DestinationDTO getDestination(String dest){
         Optional<Destination> destination = destinationRepository.findByDestination(dest);
+        return null; //TODO
     }
 }

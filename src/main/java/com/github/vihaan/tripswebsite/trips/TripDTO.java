@@ -11,53 +11,57 @@ public class TripDTO {
 
     @NotEmpty
     @FutureOrPresent
-    private LocalDate start_date;
+    private LocalDate startDate;
     @NotEmpty
     @Future
-    private LocalDate end_date;
+    private LocalDate endDate;
     @NotEmpty
     private String personName;
     @NotNull
     private int normalTickets;
     @NotNull
     private int reducedTickets;
+    @NotEmpty
+    private String username;
 
     @NotNull
     private DestinationDTO destination;
 
     public TripDTO() { }
 
-    public TripDTO(@NotEmpty LocalDate start_date,
-                   @NotEmpty LocalDate end_date,
+    public TripDTO(@NotEmpty LocalDate startDate,
+                   @NotEmpty LocalDate endDate,
                    @NotEmpty String personName,
                    @NotNull int normalTickets,
-                   @NotNull int reducedTickets) {
-        this.start_date = start_date;
-        this.end_date = end_date;
+                   @NotNull int reducedTickets,
+                   @NotEmpty String username) {
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.personName = personName;
         this.normalTickets = normalTickets;
         this.reducedTickets = reducedTickets;
+        this.username = username;
     }
 
-    public TripDTO(@NotEmpty @Future LocalDate start_date, @NotEmpty @Future LocalDate end_date) {
-        this.start_date = start_date;
-        this.end_date = end_date;
+    public TripDTO(@NotEmpty @Future LocalDate startDate, @NotEmpty @Future LocalDate endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public LocalDate getStart_date() {
-        return start_date;
+        return startDate;
     }
 
-    public void setStart_date(LocalDate start_date) {
-        this.start_date = start_date;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
-    public LocalDate getEnd_date() {
-        return end_date;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-    public void setEnd_date(LocalDate end_date) {
-        this.end_date = end_date;
+    public void setEnd_date(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     public String getPersonName() {
@@ -70,6 +74,26 @@ public class TripDTO {
 
     public int getReducedTickets() {
         return reducedTickets;
+    }
+
+    public void setPersonName(String personName) {
+        this.personName = personName;
+    }
+
+    public void setNormalTickets(int normalTickets) {
+        this.normalTickets = normalTickets;
+    }
+
+    public void setReducedTickets(int reducedTickets) {
+        this.reducedTickets = reducedTickets;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public DestinationDTO getDestination() {
@@ -87,24 +111,27 @@ public class TripDTO {
         TripDTO tripDTO = (TripDTO) o;
         return normalTickets == tripDTO.normalTickets &&
                 reducedTickets == tripDTO.reducedTickets &&
-                Objects.equals(start_date, tripDTO.start_date) &&
-                Objects.equals(end_date, tripDTO.end_date) &&
-                Objects.equals(personName, tripDTO.personName);
+                Objects.equals(startDate, tripDTO.startDate) &&
+                Objects.equals(endDate, tripDTO.endDate) &&
+                Objects.equals(personName, tripDTO.personName) &&
+                Objects.equals(username, tripDTO.username) &&
+                Objects.equals(destination, tripDTO.destination);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(start_date, end_date, personName, normalTickets, reducedTickets);
+        return Objects.hash(startDate, endDate, personName, normalTickets, reducedTickets, username, destination);
     }
 
     @Override
     public String toString() {
         return "TripDTO{" +
-                "start_date=" + start_date +
-                ", end_date=" + end_date +
+                "start_date=" + startDate +
+                ", end_date=" + endDate +
                 ", personName='" + personName + '\'' +
                 ", normalTickets=" + normalTickets +
                 ", reducedTickets=" + reducedTickets +
+                ", username='" + username + '\'' +
                 ", destination=" + destination +
                 '}';
     }

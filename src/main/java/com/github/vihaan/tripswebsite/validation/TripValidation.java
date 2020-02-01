@@ -26,6 +26,6 @@ public class TripValidation implements IValidation<TripDTO>{
     }
 
     private boolean validateDates(TripDTO trip){
-        return trip.getEnd_date().isAfter(trip.getEnd_date());
+        return trip.getEndDate().isAfter(trip.getEndDate());
     }
 }

@@ -21,6 +21,10 @@ public class DestinationValidation implements IValidation<DestinationDTO> {
         if(!validatorCheck(objectToValidate)){
             return false;
         }
-        return true;
+        return !checkIfExistAlready(objectToValidate);
+    }
+
+    private boolean checkIfExistAlready(DestinationDTO destination){
+        return destinationRepository.findByDestination(destination.getDestination()).isPresent();
     }
 }

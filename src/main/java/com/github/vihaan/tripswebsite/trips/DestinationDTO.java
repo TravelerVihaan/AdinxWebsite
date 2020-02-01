@@ -2,6 +2,7 @@ package com.github.vihaan.tripswebsite.trips;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,17 +12,19 @@ public class DestinationDTO {
     private String destination;
 
     @NotNull
+    @PositiveOrZero
     private double normalPrice;
 
     @NotNull
+    @PositiveOrZero
     private double reducedPrice;
 
     private List<TripDTO> trips;
 
     public DestinationDTO(){}
     public DestinationDTO(@NotEmpty String destination,
-                          @NotNull double normalPrice,
-                          @NotNull double reducedPrice) {
+                          @NotNull @PositiveOrZero double normalPrice,
+                          @NotNull @PositiveOrZero double reducedPrice) {
         this.destination = destination;
         this.normalPrice = normalPrice;
         this.reducedPrice = reducedPrice;

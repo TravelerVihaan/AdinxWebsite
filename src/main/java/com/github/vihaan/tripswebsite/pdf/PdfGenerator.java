@@ -1,7 +1,6 @@
 package com.github.vihaan.tripswebsite.pdf;
 
 import com.github.vihaan.tripswebsite.logging.LoggerSingleton;
-import javassist.compiler.ast.Pair;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -18,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-@Qualifier("pdfGenerator")
+@Qualifier("pdfBoxGenerator")
 public class PdfGenerator implements FileGenerator<PDDocument>{
 
     private final PDDocument document;

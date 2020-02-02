@@ -1,6 +1,7 @@
 package com.github.vihaan.tripswebsite.users;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 
@@ -17,7 +18,13 @@ public class User {
     private String username;
 
     @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
     private String password;
+
+    @Column(name = "register_date", nullable = false)
+    private LocalDateTime registerDate;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role",

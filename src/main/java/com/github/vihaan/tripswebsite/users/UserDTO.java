@@ -1,7 +1,9 @@
 package com.github.vihaan.tripswebsite.users;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 
@@ -11,9 +13,16 @@ public class UserDTO {
     @Size(min = 5, max = 30)
     private String username;
 
+    @Email
+    @NotEmpty
+    private String email;
+
     @NotEmpty
     @Size(min = 8, max = 30)
     private String password;
+
+    @NotEmpty
+    private LocalDateTime registerDate;
 
     private Set<RoleDTO> roles;
 

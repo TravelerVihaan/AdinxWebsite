@@ -99,4 +99,6 @@ public class PdfGenerator implements FileGenerator<PDDocument>{
     private final String MONTSERRAT_FONT_PATH = "src/main/resources/fonts/Montserrat-Bold.ttf";
     private final String OPENSANS_FONT = "OpenSans";
     private final String OPENSANS_FONT_PATH = "src/main/resources/fonts/OpenSans-Light.ttf";
+
+    private final String TMP_FILE_PATH = "/tmp/voucher-file.pdf";
 }

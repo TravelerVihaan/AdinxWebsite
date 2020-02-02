@@ -1,9 +1,11 @@
 package com.github.vihaan.tripswebsite.pdf;
 
 import com.github.vihaan.tripswebsite.logging.LoggerSingleton;
+import javassist.compiler.ast.Pair;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDTrueTypeFont;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,31 +21,49 @@ import java.util.Map;
 @Qualifier("pdfGenerator")
 public class PdfGenerator implements FileGenerator<PDDocument>{
 
-    PDDocument document;
-    PDPage page;
+    private final PDDocument document;
+    private PDPage page;
+    PDFont font;
     private Map<String, PDFont> fonts;
+    PDRectangle mediaBox;
 
     public PdfGenerator(){
         document = new PDDocument();
-        page = new PDPage();
+        page = new PDPage(PDRectangle.A4);
         document.addPage(page);
         fonts = initializeFonts(document);
+        mediaBox = page.getMediaBox();
     }
 
     @Override
     public PDDocument generate(){
-
+        genrateText(MONTSERRAT_FONT, 12, IFileConstants.TOP_TEXT);
         return document;
     }
 
-    private PDPageContentStream genrateText(String fontType, int fontSize){
+    private float[] calculateCenterOfDocument(String inputText) throws IOException {
+        int marginTop = 30;
+        int fontSize = 16;
+        float titleWidth = font.getStringWidth(inputText) / 1000 * fontSize;
+        float titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * fontSize;
+        float startX = (mediaBox.getWidth() - titleWidth) / 2;
+        float startY = mediaBox.getHeight() - marginTop - titleHeight;
+        return new float[]{startX, startY};
+
+    }
+
+    private PDPageContentStream genrateText(String fontType, int fontSize, String inputText){
         PDPageContentStream contentStream = null;
         try{
             contentStream = new PDPageContentStream(document, page);
+            float[] dimensions = calculateCenterOfDocument(inputText);
+            contentStream.beginText();
             contentStream.setFont(fonts.get(fontType), fontSize);
-            contentStream.showText("Hello World");
+            contentStream.newLineAtOffset(dimensions[0],dimensions[1]);
+            contentStream.showText(inputText);
             contentStream.endText();
             contentStream.close();
+            document.save("/tmp/voucher-file.pdf"); // TODO
         }catch(IOException e){
             LoggerSingleton.getLogger(this.getClass()).warn(e.getMessage());
         }finally{

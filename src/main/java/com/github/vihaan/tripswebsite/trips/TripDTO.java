@@ -1,9 +1,6 @@
 package com.github.vihaan.tripswebsite.trips;
 
-import javax.validation.constraints.Future;
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -21,6 +18,9 @@ public class TripDTO {
     private int normalTickets;
     @NotNull
     private int reducedTickets;
+    @NotNull
+    @PositiveOrZero
+    private double tripCost;
     @NotEmpty
     private String username;
 
@@ -28,7 +28,6 @@ public class TripDTO {
     private DestinationDTO destination;
 
     public TripDTO() { }
-
     public TripDTO(@NotEmpty LocalDate startDate,
                    @NotEmpty LocalDate endDate,
                    @NotEmpty String personName,
@@ -48,20 +47,12 @@ public class TripDTO {
         this.endDate = endDate;
     }
 
-    public LocalDate getStart_date() {
-        return startDate;
-    }
-
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
     public LocalDate getEndDate() {
         return endDate;
-    }
-
-    public void setEnd_date(LocalDate endDate) {
-        this.endDate = endDate;
     }
 
     public String getPersonName() {
@@ -96,6 +87,22 @@ public class TripDTO {
         this.username = username;
     }
 
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public double getTripCost() {
+        return tripCost;
+    }
+
+    public void setTripCost(double tripCost) {
+        this.tripCost = tripCost;
+    }
+
     public DestinationDTO getDestination() {
         return destination;
     }
@@ -126,11 +133,12 @@ public class TripDTO {
     @Override
     public String toString() {
         return "TripDTO{" +
-                "start_date=" + startDate +
-                ", end_date=" + endDate +
+                "startDate=" + startDate +
+                ", endDate=" + endDate +
                 ", personName='" + personName + '\'' +
                 ", normalTickets=" + normalTickets +
                 ", reducedTickets=" + reducedTickets +
+                ", tripCost=" + tripCost +
                 ", username='" + username + '\'' +
                 ", destination=" + destination +
                 '}';

@@ -28,6 +28,9 @@ public class Trip {
     @Column(name = "reduced_tickets", nullable = false)
     private int reducedTickets;
 
+    @Column(name = "trip_cost", nullable = false)
+    private double tripCost;
+
     @Column(nullable = false)
     private String username;
 
@@ -112,24 +115,12 @@ public class Trip {
         this.username = username;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Trip trip = (Trip) o;
-        return id == trip.id &&
-                normalTickets == trip.normalTickets &&
-                reducedTickets == trip.reducedTickets &&
-                Objects.equals(startDate, trip.startDate) &&
-                Objects.equals(endDate, trip.endDate) &&
-                Objects.equals(personName, trip.personName) &&
-                Objects.equals(username, trip.username) &&
-                Objects.equals(tripDestination, trip.tripDestination);
+    public double getTripCost() {
+        return tripCost;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, startDate, endDate, personName, normalTickets, reducedTickets, username, tripDestination);
+    public void setTripCost(double tripCost) {
+        this.tripCost = tripCost;
     }
 
     @Override

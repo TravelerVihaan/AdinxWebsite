@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Qualifier("tripValidation")
 public class TripValidation implements IValidation<TripDTO>{
@@ -18,11 +20,14 @@ public class TripValidation implements IValidation<TripDTO>{
     }
 
     @Override
-    public boolean isValid(TripDTO objectToValidate) {
-        if(!validatorCheck(objectToValidate)){
-            return false;
+    public List<String> isValid(TripDTO objectToValidate) {
+        List<String> validationErrors = validatorCheck(objectToValidate);
+        if(!validationErrors.isEmpty()){
+            return validationErrors;
         }
-        return validateDates(objectToValidate);
+        if(validateDates(objectToValidate))
+            validationErrors.add("${trip.dates.conflict}");
+        return validationErrors;
     }
 
     private boolean validateDates(TripDTO trip){

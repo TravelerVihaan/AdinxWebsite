@@ -55,12 +55,20 @@ public class PdfGenerator implements FileGenerator<PDDocument>{
     private Map<String, PDFont> initializeFonts(PDDocument document) {
         Map<String, PDFont> fonts = new HashMap<>();
         try {
-            fonts.put("Libre", PDTrueTypeFont.loadTTF(document, new File("src/main/resources/fonts/LibreBaskerville-Regular.ttf")));
-            fonts.put("Montserrat", PDTrueTypeFont.loadTTF(document, new File("src/main/resources/fonts/Montserrat-Bold.ttf")));
-            fonts.put("OpenSans", PDTrueTypeFont.loadTTF(document, new File("src/main/resources/fonts/OpenSans-Light.ttf")));
+            fonts.put(LIBRE_FONT, PDTrueTypeFont.loadTTF(document, new File(LIBRE_FONT_PATH)));
+            fonts.put(MONTSERRAT_FONT, PDTrueTypeFont.loadTTF(document, new File(MONTSERRAT_FONT_PATH)));
+            fonts.put(OPENSANS_FONT, PDTrueTypeFont.loadTTF(document, new File(OPENSANS_FONT_PATH)));
         }catch(IOException e){
             LoggerSingleton.getLogger(this.getClass()).warn(e.getMessage());
         }
         return fonts;
     }
+
+    private final String LIBRE_FONT = "Libre";
+    private final String LIBRE_FONT_PATH = "src/main/resources/fonts/LibreBaskerville-Regular.ttf";
+    private final String MONTSERRAT_FONT = "Montserrat";
+    private final String MONTSERRAT_FONT_PATH = "src/main/resources/fonts/Montserrat-Bold.ttf";
+    private final String OPENSANS_FONT = "OpenSans";
+    private final String OPENSANS_FONT_PATH = "src/main/resources/fonts/OpenSans-Light.ttf";
+
 }

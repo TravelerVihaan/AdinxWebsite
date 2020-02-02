@@ -11,4 +11,8 @@ interface IControllersStrings {
 
     //Trips List Controller
     String TRIPS_LIST = "trips";
+
+    //User Controller
+    String REGISTER_PAGE = "register-page";
+    String REGISTRATION_RESULT = "registration-result";
 }

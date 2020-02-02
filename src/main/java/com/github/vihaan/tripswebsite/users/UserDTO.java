@@ -9,16 +9,16 @@ import java.util.Set;
 
 public class UserDTO {
 
-    @NotEmpty
-    @Size(min = 5, max = 30)
+    @NotEmpty(message = "{user.empty.username}")
+    @Size(min = 5, max = 30, message = "{user.username.length}")
     private String username;
 
-    @Email
-    @NotEmpty
+    @Email(message = "{user.wrong.email.syntax}")
+    @NotEmpty(message = "{user.empty.email}")
     private String email;
 
-    @NotEmpty
-    @Size(min = 8, max = 30)
+    @NotEmpty(message = "{user.empty.password}")
+    @Size(min = 8, max = 30, message = "{user.password.length}")
     private String password;
 
     @NotEmpty

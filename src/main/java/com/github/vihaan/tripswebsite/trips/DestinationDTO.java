@@ -8,15 +8,15 @@ import java.util.Objects;
 
 public class DestinationDTO {
 
-    @NotEmpty
+    @NotEmpty(message = "{destination.empty.dest}")
     private String destination;
 
     @NotNull
-    @PositiveOrZero
+    @PositiveOrZero(message = "{destination.wrong.price}")
     private double normalPrice;
 
     @NotNull
-    @PositiveOrZero
+    @PositiveOrZero(message = "{destination.wrong.price}")
     private double reducedPrice;
 
     private List<TripDTO> trips;

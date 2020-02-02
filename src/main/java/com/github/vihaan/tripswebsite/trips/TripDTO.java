@@ -6,17 +6,17 @@ import java.util.Objects;
 
 public class TripDTO {
 
-    @NotEmpty
-    @FutureOrPresent
+    @NotEmpty(message = "{trip.empty.date}")
+    @FutureOrPresent(message = "{trip.wrong.start.date}")
     private LocalDate startDate;
-    @NotEmpty
-    @Future
+    @NotEmpty(message = "{trip.empty.date}")
+    @Future(message = "{trip.wrong.end.date}")
     private LocalDate endDate;
-    @NotEmpty
+    @NotEmpty(message = "{trip.empty.personname}")
     private String personName;
-    @NotNull
+    @NotNull(message = "{trip.null.tickets}")
     private int normalTickets;
-    @NotNull
+    @NotNull(message = "{trip.null.tickets}")
     private int reducedTickets;
     @NotNull
     @PositiveOrZero

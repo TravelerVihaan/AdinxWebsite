@@ -13,34 +13,30 @@ import java.util.stream.Collectors;
 @Service
 public class AddNewUser {
 
-    private UserRepository userRepository;
-    private RoleRepository roleRepository;
-    private IMapper<User, UserDTO> userMapper;
+    private UserRepositoriesFacade userRepositoriesFacade;
     private IValidation<UserDTO> userValidator;
 
     @Autowired
-    public AddNewUser(@Qualifier("userMapper") IMapper userMapper,
-                      @Qualifier("userValidation") IValidation userValidator,
-                      UserRepository userRepository,
-                      RoleRepository roleRepository){
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.userMapper = userMapper;
+    public AddNewUser(@Qualifier("userValidation") IValidation userValidator,
+            UserRepositoriesFacade userRepositoriesFacade){
+        this.userRepositoriesFacade = userRepositoriesFacade;
         this.userValidator = userValidator;
     }
 
-    public void addNewUser(UserDTO userDTO){
+    public String addNewUser(UserDTO userDTO){
         if(!userValidator.isValid(userDTO))
-            return; //TODO
+            return null; //TODO
         userDTO.setRegisterDate(LocalDateTime.now());
-        User user = userMapper.convertDtoToEntity(userDTO);
+        IMapper<User,UserDTO> mapper = userRepositoriesFacade.getUserMapper();
+        User user = mapper.convertDtoToEntity(userDTO);
         Set<RoleDTO> rolesDtoSet = userDTO.getRoles();
         Set<Role> roles = rolesDtoSet.stream().map(role -> findAndConvertToRole(role.getRole())).collect(Collectors.toSet());
         user.setRoles(roles);
-        userRepository.save(user);
+        userRepositoriesFacade.saveUser(user);
+        return "";
     }
 
     private Role findAndConvertToRole(String role){
-        return roleRepository.findByRole(role).orElseThrow();
+        return userRepositoriesFacade.getRoleByRoleName(role).orElseThrow();
     }
 }

@@ -9,35 +9,30 @@ import org.springframework.stereotype.Service;
 @Service
 public class TripBooking {
 
-    private TripRepository tripRepository;
-    private IMapper<Trip, TripDTO> tripMapper;
+    private TripRepositoriesFacade tripRepositoriesFacade;
     private IValidation<TripDTO> tripValidator;
-    private DestinationRepository destinationRepository;
 
     @Autowired
-    public TripBooking(@Qualifier("tripMapper") IMapper tripMapper,
-                       @Qualifier("tripValidation") IValidation tripValidator,
-                       DestinationRepository destinationRepository,
-                       TripRepository tripRepository){
-        this.tripMapper = tripMapper;
+    public TripBooking(@Qualifier("tripValidation") IValidation tripValidator,
+                       TripRepositoriesFacade tripRepositoriesFacade){
+        this.tripRepositoriesFacade = tripRepositoriesFacade;
         this.tripValidator = tripValidator;
-        this.tripRepository = tripRepository;
-        this.destinationRepository = destinationRepository;
     }
 
     public void executeBooking(TripDTO tripDTO){
         if(!tripValidator.isValid(tripDTO))
             return; //TODO
         tripDTO.setTripCost(calculateTripCost(tripDTO));
+        IMapper<Trip, TripDTO> tripMapper = tripRepositoriesFacade.getTripMapper();
         Trip trip = tripMapper.convertDtoToEntity(tripDTO);
         trip.setTripDestination(prepareDestinationEntityToSave(tripDTO));
-        tripRepository.save(trip);
+        tripRepositoriesFacade.saveTrip(trip);
 
 
     }
 
     private Destination prepareDestinationEntityToSave(TripDTO tripDTO){
-        return destinationRepository.findByDestination(tripDTO.getDestination().getDestination()).orElseThrow();
+        return tripRepositoriesFacade.getDestinationByName(tripDTO.getDestination().getDestination()).orElseThrow();
     }
 
     private double calculateTripCost(TripDTO tripDTO){

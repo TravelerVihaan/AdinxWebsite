@@ -19,20 +19,28 @@ import java.util.Map;
 @Qualifier("pdfGenerator")
 public class PdfGenerator implements FileGenerator<PDDocument>{
 
+    PDDocument document;
+    PDPage page;
+    private Map<String, PDFont> fonts;
+
+    public PdfGenerator(){
+        document = new PDDocument();
+        page = new PDPage();
+        document.addPage(page);
+        fonts = initializeFonts(document);
+    }
+
     @Override
     public PDDocument generate(){
-        PDDocument document = new PDDocument();
-        PDPage page = new PDPage();
-        document.addPage(page);
-        Map<String, PDFont> fonts = initializeFonts(document);
+
         return document;
     }
 
-    private PDPageContentStream generatePdfContent(PDDocument document, PDPage page){
+    private PDPageContentStream genrateText(String fontType, int fontSize){
         PDPageContentStream contentStream = null;
         try{
             contentStream = new PDPageContentStream(document, page);
-            contentStream.setFont();
+            contentStream.setFont(fonts.get(fontType), fontSize);
             contentStream.showText("Hello World");
             contentStream.endText();
             contentStream.close();
@@ -64,11 +72,11 @@ public class PdfGenerator implements FileGenerator<PDDocument>{
         return fonts;
     }
 
+    // PDF Fonts
     private final String LIBRE_FONT = "Libre";
     private final String LIBRE_FONT_PATH = "src/main/resources/fonts/LibreBaskerville-Regular.ttf";
     private final String MONTSERRAT_FONT = "Montserrat";
     private final String MONTSERRAT_FONT_PATH = "src/main/resources/fonts/Montserrat-Bold.ttf";
     private final String OPENSANS_FONT = "OpenSans";
     private final String OPENSANS_FONT_PATH = "src/main/resources/fonts/OpenSans-Light.ttf";
-
 }

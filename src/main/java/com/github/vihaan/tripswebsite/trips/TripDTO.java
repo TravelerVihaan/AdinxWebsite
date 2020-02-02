@@ -2,13 +2,14 @@ package com.github.vihaan.tripswebsite.trips;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class TripDTO {
 
     @NotEmpty(message = "{trip.empty.date}")
     @FutureOrPresent(message = "{trip.wrong.start.date}")
-    private LocalDate startDate;
+    private LocalDateTime startDate;
     @NotEmpty(message = "{trip.empty.date}")
     @Future(message = "{trip.wrong.end.date}")
     private LocalDate endDate;
@@ -28,7 +29,7 @@ public class TripDTO {
     private DestinationDTO destination;
 
     public TripDTO() { }
-    public TripDTO(@NotEmpty LocalDate startDate,
+    public TripDTO(@NotEmpty LocalDateTime startDate,
                    @NotEmpty LocalDate endDate,
                    @NotEmpty String personName,
                    @NotNull int normalTickets,
@@ -42,12 +43,12 @@ public class TripDTO {
         this.username = username;
     }
 
-    public TripDTO(@NotEmpty @Future LocalDate startDate, @NotEmpty @Future LocalDate endDate) {
+    public TripDTO(@NotEmpty @Future LocalDateTime startDate, @NotEmpty @Future LocalDate endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
@@ -87,7 +88,7 @@ public class TripDTO {
         this.username = username;
     }
 
-    public LocalDate getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 

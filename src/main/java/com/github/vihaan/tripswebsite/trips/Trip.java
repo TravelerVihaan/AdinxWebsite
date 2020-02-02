@@ -2,6 +2,7 @@ package com.github.vihaan.tripswebsite.trips;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -14,7 +15,7 @@ public class Trip {
     private long id;
 
     @Column(nullable = false)
-    private LocalDate startDate;
+    private LocalDateTime startDate;
 
     @Column(nullable = false)
     private LocalDate endDate;
@@ -39,7 +40,7 @@ public class Trip {
     private Destination tripDestination;
 
     public Trip(){}
-    public Trip(LocalDate startDate, LocalDate endDate, Destination tripDestination,
+    public Trip(LocalDateTime startDate, LocalDate endDate, Destination tripDestination,
                 String personName, int normalTickets, int reducedTickets,
                 String username) {
         this.startDate = startDate;
@@ -59,11 +60,11 @@ public class Trip {
         this.id = id;
     }
 
-    public LocalDate getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 

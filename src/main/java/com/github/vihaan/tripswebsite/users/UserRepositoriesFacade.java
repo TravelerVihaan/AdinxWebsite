@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class UserRepositoriesFacade {
+class UserRepositoriesFacade {
 
     private UserRepository userRepository;
     private RoleRepository roleRepository;
@@ -16,7 +16,7 @@ public class UserRepositoriesFacade {
     private IMapper<User, UserDTO> userMapper;
 
     @Autowired
-    public UserRepositoriesFacade(@Qualifier("roleMapper") IMapper roleMapper,
+    UserRepositoriesFacade(@Qualifier("roleMapper") IMapper roleMapper,
                                   @Qualifier("userMapper")IMapper userMapper,
                                   UserRepository userRepository,
                                   RoleRepository roleRepository

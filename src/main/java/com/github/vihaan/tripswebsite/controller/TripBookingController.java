@@ -8,16 +8,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class TripBookingController {
 
-    private
 
-    @GetMapping
+    @GetMapping(IControllersStrings.BOOK_TRIP_PATH)
     public String bookTrip(Model model){
-        model.addAttribute()
-        return IControllersStrings.BOOK_TRIP;
+        //model.addAttribute()
+        return IControllersStrings.PROCESS_BOOKING;
     }
 
-    @PostMapping
+    @PostMapping(IControllersStrings.PROCESS_BOOKING_PATH)
     public String executeBooking(){
-        return IControllersStrings.PROCESS_BOOKING;
+        return IControllersStrings.BOOKING_RESULT;
     }
 }

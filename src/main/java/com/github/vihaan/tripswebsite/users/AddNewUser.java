@@ -29,9 +29,8 @@ public class AddNewUser {
     }
 
     public void addNewUser(UserDTO userDTO){
-        if(!userValidator.isValid(userDTO)){
+        if(!userValidator.isValid(userDTO))
             return; //TODO
-        }
         User user = userMapper.convertDtoToEntity(userDTO);
         Set<RoleDTO> rolesDtoSet = userDTO.getRoles();
         Set<Role> roles = rolesDtoSet.stream().map(role -> findAndConvertToRole(role.getRole())).collect(Collectors.toSet());

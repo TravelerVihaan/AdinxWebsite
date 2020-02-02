@@ -18,4 +18,13 @@ interface IControllersStrings {
     //User Controller
     String REGISTER_PAGE = "register-page";
     String REGISTRATION_RESULT = "registration-result";
+
+    //Destination Controller
+    String DESTINATIONS_LIST_PATH = "/destinations";
+    String DESTINATIONS_LIST = "destinations";
+    String DESTINATION_PATH = "/destinations/{id}";
+    String DESTINATION = "destination";
+
+    //Common
+    String REDIRECT_PREFIX = "redirect:/";
 }

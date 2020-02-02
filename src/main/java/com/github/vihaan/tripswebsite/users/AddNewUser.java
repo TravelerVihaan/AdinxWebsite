@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -31,6 +32,7 @@ public class AddNewUser {
     public void addNewUser(UserDTO userDTO){
         if(!userValidator.isValid(userDTO))
             return; //TODO
+        userDTO.setRegisterDate(LocalDateTime.now());
         User user = userMapper.convertDtoToEntity(userDTO);
         Set<RoleDTO> rolesDtoSet = userDTO.getRoles();
         Set<Role> roles = rolesDtoSet.stream().map(role -> findAndConvertToRole(role.getRole())).collect(Collectors.toSet());

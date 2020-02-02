@@ -28,6 +28,7 @@ public class TripBooking {
     public void executeBooking(TripDTO tripDTO){
         if(!tripValidator.isValid(tripDTO))
             return; //TODO
+        tripDTO.setTripCost(calculateTripCost(tripDTO));
         Trip trip = tripMapper.convertDtoToEntity(tripDTO);
         trip.setTripDestination(prepareDestinationEntityToSave(tripDTO));
         tripRepository.save(trip);
@@ -37,5 +38,11 @@ public class TripBooking {
 
     private Destination prepareDestinationEntityToSave(TripDTO tripDTO){
         return destinationRepository.findByDestination(tripDTO.getDestination().getDestination()).orElseThrow();
+    }
+
+    private double calculateTripCost(TripDTO tripDTO){
+        double cost = tripDTO.getNormalTickets()*tripDTO.getDestination().getNormalPrice();
+        cost += tripDTO.getReducedTickets()*tripDTO.getDestination().getReducedPrice();
+        return cost;
     }
 }

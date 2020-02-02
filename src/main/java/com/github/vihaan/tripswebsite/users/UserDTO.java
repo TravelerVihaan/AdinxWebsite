@@ -27,8 +27,11 @@ public class UserDTO {
     private Set<RoleDTO> roles;
 
     public UserDTO() { }
-    public UserDTO(@NotEmpty String username, @NotEmpty @Size(min = 8, max = 30) String password) {
+    public UserDTO(@NotEmpty @Size(min = 5, max = 30) String username,
+                   @Email @NotEmpty String email,
+                   @NotEmpty @Size(min = 8, max = 30) String password) {
         this.username = username;
+        this.email = email;
         this.password = password;
     }
 
@@ -48,6 +51,22 @@ public class UserDTO {
         this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public LocalDateTime getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(LocalDateTime registerDate) {
+        this.registerDate = registerDate;
+    }
+
     public Set<RoleDTO> getRoles() {
         return roles;
     }
@@ -61,18 +80,22 @@ public class UserDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserDTO userDTO = (UserDTO) o;
-        return Objects.equals(username, userDTO.username);
+        return Objects.equals(username, userDTO.username) &&
+                Objects.equals(email, userDTO.email) &&
+                Objects.equals(registerDate, userDTO.registerDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username);
+        return Objects.hash(username, email, registerDate);
     }
 
     @Override
     public String toString() {
         return "UserDTO{" +
                 "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", registerDate=" + registerDate +
                 ", roles=" + roles +
                 '}';
     }

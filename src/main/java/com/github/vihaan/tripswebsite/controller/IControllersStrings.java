@@ -1,6 +1,6 @@
 package com.github.vihaan.tripswebsite.controller;
 
-interface IControllersStrings {
+public interface IControllersStrings {
 
     //Login Controller
     String LOGIN = "login";
@@ -14,6 +14,9 @@ interface IControllersStrings {
 
     //Trips List Controller
     String TRIPS_LIST = "trips";
+    String TRIPS_LIST_PATH = "/trips";
+    String TRIP_PATH = "/trip" + IControllersStrings.ID_PATH;
+    String TRIP = "trip" + IControllersStrings.ID_PATH;
 
     //User Controller
     String REGISTER_PAGE = "register-page";
@@ -22,9 +25,10 @@ interface IControllersStrings {
     //Destination Controller
     String DESTINATIONS_LIST_PATH = "/destinations";
     String DESTINATIONS_LIST = "destinations";
-    String DESTINATION_PATH = "/destinations/{id}";
+    String DESTINATION_PATH = "/destinations" + IControllersStrings.ID_PATH;
     String DESTINATION = "destination";
 
     //Common
+    String ID_PATH = "/{id}";
     String REDIRECT_PREFIX = "redirect:/";
 }

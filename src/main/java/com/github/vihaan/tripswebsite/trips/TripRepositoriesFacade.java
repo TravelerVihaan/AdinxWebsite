@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 class TripRepositoriesFacade {
@@ -36,6 +38,28 @@ class TripRepositoriesFacade {
 
     Optional<Destination> getDestinationByName(String dest){
         return destinationRepository.findByDestination(dest);
+    }
+
+    List<Destination> getAllDestinations(){
+        return destinationRepository.findAll();
+    }
+
+    List<DestinationDTO> getAllDestinationDtos(){
+        return destinationRepository.findAll()
+                .stream()
+                .map(destination -> destinationMapper.convertEntityToDto(destination))
+                .collect(Collectors.toList());
+    }
+
+    List<Trip> getAllTrips(){
+        return tripRepository.findAll();
+    }
+
+    List<TripDTO> getAllTripDtos(){
+        return tripRepository.findAll()
+                .stream()
+                .map(destination -> tripMapper.convertEntityToDto(destination))
+                .collect(Collectors.toList());
     }
 
     Optional<Trip> getTripById(long id){

@@ -1,5 +1,6 @@
-package com.github.vihaan.tripswebsite.controller;
+package com.github.vihaan.tripswebsite.trips;
 
+import com.github.vihaan.tripswebsite.controller.IControllersStrings;
 import com.github.vihaan.tripswebsite.trips.DestinationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,16 +12,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class DestinationController {
 
-    private DestinationService destinationService;
+    private TripRepositoriesFacade tripRepositoriesFacade;
 
     @Autowired
-    public DestinationController(DestinationService destinationService){
-        this.destinationService = destinationService;
+    public DestinationController(TripRepositoriesFacade tripRepositoriesFacade){
+        this.tripRepositoriesFacade = tripRepositoriesFacade;
     }
 
     @GetMapping(IControllersStrings.DESTINATIONS_LIST_PATH)
     public String getDestinations(Model model){
-        model.addAttribute("destinationList",destinationService.getAllDestinations());
+        model.addAttribute("destinationList",tripRepositoriesFacade.getAllDestinationDtos());
         return IControllersStrings.DESTINATIONS_LIST;
     }
 

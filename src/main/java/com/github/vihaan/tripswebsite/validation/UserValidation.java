@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Qualifier("userValidation")
 public class UserValidation implements IValidation<UserDTO>{
@@ -18,11 +20,11 @@ public class UserValidation implements IValidation<UserDTO>{
     }
 
     @Override
-    public boolean isValid(UserDTO objectToValidate) {
-        if(!validatorCheck(objectToValidate)){
-            return false;
-        }
-        return !checkIfExistAlready(objectToValidate);
+    public List<String> isValid(UserDTO objectToValidate) {
+        List<String> validationErrors = validatorCheck(objectToValidate);
+        if(checkIfExistAlready(objectToValidate))
+            validationErrors.add(IValidationMessages.DATES_CONFLICT);
+        return validationErrors;
     }
 
     private boolean checkIfExistAlready(UserDTO user){

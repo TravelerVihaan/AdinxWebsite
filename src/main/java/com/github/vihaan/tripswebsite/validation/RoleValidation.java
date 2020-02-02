@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Qualifier("roleValidation")
 public class RoleValidation implements IValidation<RoleDTO>{
@@ -18,11 +20,11 @@ public class RoleValidation implements IValidation<RoleDTO>{
     }
 
     @Override
-    public boolean isValid(RoleDTO objectToValidate) {
-        if(!validatorCheck(objectToValidate)){
-            return false;
-        }
-        return !checkIfExistAlready(objectToValidate);
+    public List<String> isValid(RoleDTO objectToValidate) {
+        List<String> validationErrors = validatorCheck(objectToValidate);
+        if(checkIfExistAlready(objectToValidate))
+            validationErrors.add(IValidationMessages.DB_CONFLICT);
+        return validationErrors;
     }
 
     private boolean checkIfExistAlready(RoleDTO role){

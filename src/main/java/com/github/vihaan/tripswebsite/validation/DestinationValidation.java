@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Qualifier("destinationValidation")
 public class DestinationValidation implements IValidation<DestinationDTO> {
@@ -17,11 +19,11 @@ public class DestinationValidation implements IValidation<DestinationDTO> {
         this.destinationRepository = destinationRepository;
     }
 
-    public boolean isValid(DestinationDTO objectToValidate) {
-        if(!validatorCheck(objectToValidate)){
-            return false;
-        }
-        return !checkIfExistAlready(objectToValidate);
+    public List<String> isValid(DestinationDTO objectToValidate) {
+        List<String> validationErrors = validatorCheck(objectToValidate);
+        if(checkIfExistAlready(objectToValidate))
+            validationErrors.add(IValidationMessages.DB_CONFLICT);
+        return validationErrors;
     }
 
     private boolean checkIfExistAlready(DestinationDTO destination){

@@ -22,11 +22,8 @@ public class TripValidation implements IValidation<TripDTO>{
     @Override
     public List<String> isValid(TripDTO objectToValidate) {
         List<String> validationErrors = validatorCheck(objectToValidate);
-        if(!validationErrors.isEmpty()){
-            return validationErrors;
-        }
         if(validateDates(objectToValidate))
-            validationErrors.add("${trip.dates.conflict}");
+            validationErrors.add(IValidationMessages.DATES_CONFLICT);
         return validationErrors;
     }
 

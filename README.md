@@ -2,10 +2,11 @@
 Web service designed for my friend's company
 
 ## Used technology stack
-Spring Boot 2
-Java 13
-MySQL / MongoDB (?)
-Junit5 in tests
+Spring Boot 2<br>
+Java 13<br>
+MongoDB on Atlas<br>
+Junit5 in tests<br>
+REST / Thymeleaf + HTML + Bootstrap<br>
 
 ## Packaging
 Fat Jar by Maven

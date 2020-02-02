@@ -20,7 +20,9 @@ public interface IControllersStrings {
 
     //User Controller
     String REGISTER_PAGE = "register-page";
+    String REGISTER_PAGE_PATH = "/register-page";
     String REGISTRATION_RESULT = "registration-result";
+    String REGISTRATION_PATH = "/registration";
 
     //Destination Controller
     String DESTINATIONS_LIST_PATH = "/destinations";

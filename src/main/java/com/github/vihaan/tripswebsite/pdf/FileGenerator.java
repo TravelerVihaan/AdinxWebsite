@@ -1,6 +1,8 @@
 package com.github.vihaan.tripswebsite.pdf;
 
+import java.io.IOException;
+
 public interface FileGenerator<T> {
 
-    T generate();
+    T generate() throws IOException;
 }

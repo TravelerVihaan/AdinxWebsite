@@ -7,16 +7,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Controller("/user")
+@Controller
 public class UserController {
 
-    @GetMapping("/register-page")
+    @GetMapping(IControllersStrings.REGISTER_PAGE_PATH)
     public String registerUserForm(Model model){
 
         return IControllersStrings.REGISTER_PAGE;
     }
 
-    @PostMapping("/registration")
+    @PostMapping(IControllersStrings.REGISTRATION_PATH)
     public String doRegistration(Model model, @RequestParam UserDTO userDTO){
 
         return IControllersStrings.REGISTRATION_RESULT;

@@ -20,7 +20,7 @@ public class TripBooking {
     }
 
     public void executeBooking(TripDTO tripDTO){
-        if(!tripValidator.isValid(tripDTO))
+        if(!tripValidator.isValid(tripDTO).isEmpty())
             return; //TODO
         tripDTO.setTripCost(calculateTripCost(tripDTO));
         IMapper<Trip, TripDTO> tripMapper = tripRepositoriesFacade.getTripMapper();

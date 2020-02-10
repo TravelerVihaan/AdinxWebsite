@@ -6,5 +6,5 @@ import java.io.IOException;
 
 public interface FileGenerator<T> {
 
-    T generate() throws IOException, DocumentException;
+    void generate() throws IOException, DocumentException;
 }

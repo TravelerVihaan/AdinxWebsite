@@ -35,9 +35,8 @@ public class PdfGenerator implements FileGenerator<PDDocument>{
     }
 
     @Override
-    public PDDocument generate(){
-        genrateText(MONTSERRAT_FONT, 12, IFileConstants.TOP_TEXT);
-        return document;
+    public void generate(){
+        genrateText(IFileConstants.MONTSERRAT_FONT, 12, IFileConstants.TOP_TEXT);
     }
 
     private float[] calculateCenterOfDocument(String inputText) throws IOException {
@@ -68,6 +67,7 @@ public class PdfGenerator implements FileGenerator<PDDocument>{
         }finally{
             closeStream(contentStream);
         }
+        return null;
     }
 
     private void closeStream(Closeable closeable){
@@ -82,22 +82,14 @@ public class PdfGenerator implements FileGenerator<PDDocument>{
     private Map<String, PDFont> initializeFonts(PDDocument document) {
         Map<String, PDFont> fonts = new HashMap<>();
         try {
-            fonts.put(LIBRE_FONT, PDTrueTypeFont.loadTTF(document, new File(LIBRE_FONT_PATH)));
-            fonts.put(MONTSERRAT_FONT, PDTrueTypeFont.loadTTF(document, new File(MONTSERRAT_FONT_PATH)));
-            fonts.put(OPENSANS_FONT, PDTrueTypeFont.loadTTF(document, new File(OPENSANS_FONT_PATH)));
+            fonts.put(IFileConstants.LIBRE_FONT, PDTrueTypeFont.loadTTF(document, new File(IFileConstants.LIBRE_FONT_PATH)));
+            fonts.put(IFileConstants.MONTSERRAT_FONT, PDTrueTypeFont.loadTTF(document, new File(IFileConstants.MONTSERRAT_FONT_PATH)));
+            fonts.put(IFileConstants.OPENSANS_FONT, PDTrueTypeFont.loadTTF(document, new File(IFileConstants.OPENSANS_FONT_PATH)));
         }catch(IOException e){
             LoggerSingleton.getLogger(this.getClass()).warn(e.getMessage());
         }
         return fonts;
     }
 
-    // PDF Fonts
-    private final String LIBRE_FONT = "Libre";
-    private final String LIBRE_FONT_PATH = "src/main/resources/fonts/LibreBaskerville-Regular.ttf";
-    private final String MONTSERRAT_FONT = "Montserrat";
-    private final String MONTSERRAT_FONT_PATH = "src/main/resources/fonts/Montserrat-Bold.ttf";
-    private final String OPENSANS_FONT = "OpenSans";
-    private final String OPENSANS_FONT_PATH = "src/main/resources/fonts/OpenSans-Light.ttf";
 
-    private final String TMP_FILE_PATH = "/tmp/voucher-file.pdf";
 }

@@ -8,11 +8,8 @@ import java.util.Objects;
 public class TripDTO {
 
     @NotEmpty(message = "{trip.empty.date}")
-    @FutureOrPresent(message = "{trip.wrong.start.date}")
-    private LocalDateTime startDate;
-    @NotEmpty(message = "{trip.empty.date}")
-    @Future(message = "{trip.wrong.end.date}")
-    private LocalDate endDate;
+    @FutureOrPresent(message = "{trip.wrong.date}")
+    private LocalDateTime tripDate;
     @NotEmpty(message = "{trip.empty.personname}")
     private String personName;
     @NotNull(message = "{trip.null.tickets}")
@@ -24,36 +21,27 @@ public class TripDTO {
     private double tripCost;
     @NotEmpty
     private String username;
+    @NotEmpty
+    private String voucherNumber;
 
     @NotNull
     private DestinationDTO destination;
 
     public TripDTO() { }
-    public TripDTO(@NotEmpty LocalDateTime startDate,
-                   @NotEmpty LocalDate endDate,
+    public TripDTO(@NotEmpty LocalDateTime tripDate,
                    @NotEmpty String personName,
                    @NotNull int normalTickets,
                    @NotNull int reducedTickets,
                    @NotEmpty String username) {
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.tripDate = tripDate;
         this.personName = personName;
         this.normalTickets = normalTickets;
         this.reducedTickets = reducedTickets;
         this.username = username;
     }
 
-    public TripDTO(@NotEmpty @Future LocalDateTime startDate, @NotEmpty @Future LocalDate endDate) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
-
-    public void setStartDate(LocalDateTime startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
+    public void setTripDate(LocalDateTime tripDate) {
+        this.tripDate = tripDate;
     }
 
     public String getPersonName() {
@@ -88,12 +76,8 @@ public class TripDTO {
         this.username = username;
     }
 
-    public LocalDateTime getStartDate() {
-        return startDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+    public LocalDateTime getTripDate() {
+        return tripDate;
     }
 
     public double getTripCost() {
@@ -103,6 +87,10 @@ public class TripDTO {
     public void setTripCost(double tripCost) {
         this.tripCost = tripCost;
     }
+
+    public String getVoucherNumber() { return voucherNumber; }
+
+    public void setVoucherNumber(String voucherNumber) { this.voucherNumber = voucherNumber; }
 
     public DestinationDTO getDestination() {
         return destination;
@@ -117,30 +105,25 @@ public class TripDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TripDTO tripDTO = (TripDTO) o;
-        return normalTickets == tripDTO.normalTickets &&
-                reducedTickets == tripDTO.reducedTickets &&
-                Objects.equals(startDate, tripDTO.startDate) &&
-                Objects.equals(endDate, tripDTO.endDate) &&
-                Objects.equals(personName, tripDTO.personName) &&
-                Objects.equals(username, tripDTO.username) &&
-                Objects.equals(destination, tripDTO.destination);
+        return Objects.equals(username, tripDTO.username) &&
+                Objects.equals(voucherNumber, tripDTO.voucherNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(startDate, endDate, personName, normalTickets, reducedTickets, username, destination);
+        return Objects.hash(username, voucherNumber);
     }
 
     @Override
     public String toString() {
         return "TripDTO{" +
-                "startDate=" + startDate +
-                ", endDate=" + endDate +
+                "tripDate=" + tripDate +
                 ", personName='" + personName + '\'' +
                 ", normalTickets=" + normalTickets +
                 ", reducedTickets=" + reducedTickets +
                 ", tripCost=" + tripCost +
                 ", username='" + username + '\'' +
+                ", voucherNumber='" + voucherNumber + '\'' +
                 ", destination=" + destination +
                 '}';
     }

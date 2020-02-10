@@ -14,11 +14,8 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
-    private LocalDateTime startDate;
-
-    @Column(nullable = false)
-    private LocalDate endDate;
+    @Column(name = "trip_date", nullable = false)
+    private LocalDateTime tripDate;
 
     @Column(name = "person_name", nullable = false)
     private String personName;
@@ -35,16 +32,18 @@ public class Trip {
     @Column(nullable = false)
     private String username;
 
+    @Column(nullable = false, unique = true)
+    private String voucherNumber;
+
     @ManyToOne
     @JoinColumn(name="destination_id")
     private Destination tripDestination;
 
     public Trip(){}
-    public Trip(LocalDateTime startDate, LocalDate endDate, Destination tripDestination,
+    public Trip(LocalDateTime tripDate, Destination tripDestination,
                 String personName, int normalTickets, int reducedTickets,
                 String username) {
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.tripDate = tripDate;
         this.tripDestination = tripDestination;
         this.personName = personName;
         this.normalTickets = normalTickets;
@@ -60,21 +59,9 @@ public class Trip {
         this.id = id;
     }
 
-    public LocalDateTime getStartDate() {
-        return startDate;
-    }
+    public LocalDateTime getTripDate() { return tripDate; }
 
-    public void setStartDate(LocalDateTime startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
+    public void setTripDate(LocalDateTime tripDate) { this.tripDate = tripDate; }
 
     public Destination getTripDestination() {
         return tripDestination;
@@ -124,16 +111,38 @@ public class Trip {
         this.tripCost = tripCost;
     }
 
+    public String getVoucherNumber() {
+        return voucherNumber;
+    }
+
+    public void setVoucherNumber(String voucherNumber) {
+        this.voucherNumber = voucherNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Trip trip = (Trip) o;
+        return Objects.equals(voucherNumber, trip.voucherNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(voucherNumber);
+    }
+
     @Override
     public String toString() {
         return "Trip{" +
                 "id=" + id +
-                ", start_date=" + startDate +
-                ", end_date=" + endDate +
+                ", tripDate=" + tripDate +
                 ", personName='" + personName + '\'' +
                 ", normalTickets=" + normalTickets +
                 ", reducedTickets=" + reducedTickets +
+                ", tripCost=" + tripCost +
                 ", username='" + username + '\'' +
+                ", voucherNumber='" + voucherNumber + '\'' +
                 ", tripDestination=" + tripDestination +
                 '}';
     }

@@ -25,4 +25,14 @@ interface IFileConstants {
             "Order date";
     final String SIGNATURE1 = "Make it EASY with us!";
     final String SIGNATURE2 = "EasyTours!";
+
+    // PDF Fonts
+    final String LIBRE_FONT = "Libre";
+    final String LIBRE_FONT_PATH = "src/main/resources/fonts/LibreBaskerville-Regular.ttf";
+    final String MONTSERRAT_FONT = "Montserrat";
+    final String MONTSERRAT_FONT_PATH = "src/main/resources/fonts/Montserrat-Bold.ttf";
+    final String OPENSANS_FONT = "OpenSans";
+    final String OPENSANS_FONT_PATH = "src/main/resources/fonts/OpenSans-Light.ttf";
+
+    final String TMP_FILE_PATH = "/tmp/voucher-file.pdf";
 }

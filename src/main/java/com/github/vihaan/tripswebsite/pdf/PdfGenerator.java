@@ -1,6 +1,7 @@
 package com.github.vihaan.tripswebsite.pdf;
 
 import com.github.vihaan.tripswebsite.logging.LoggerSingleton;
+import com.github.vihaan.tripswebsite.trips.TripDTO;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -35,7 +36,7 @@ public class PdfGenerator implements FileGenerator<PDDocument>{
     }
 
     @Override
-    public void generate(){
+    public void generate(TripDTO tripDTO){
         genrateText(IFileConstants.MONTSERRAT_FONT, 12, IFileConstants.TOP_TEXT);
     }
 

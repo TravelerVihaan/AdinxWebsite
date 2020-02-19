@@ -1,6 +1,7 @@
 package com.github.vihaan.tripswebsite.pdf;
 
 import com.github.vihaan.tripswebsite.logging.LoggerSingleton;
+import com.github.vihaan.tripswebsite.trips.TripDTO;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,7 +16,7 @@ import java.util.Set;
 public class PdfItextGenerator implements FileGenerator<Document>{
 
     @Override
-    public void generate() throws IOException {
+    public void generate(TripDTO tripDTO) throws IOException {
         Document document = new Document(PageSize.A4,20, 20, 20, 20);
         try {
             PdfWriter.getInstance(document, new FileOutputStream(IFileConstants.TMP_FILE_PATH));
@@ -23,11 +24,17 @@ public class PdfItextGenerator implements FileGenerator<Document>{
         registerFonts();
         document.open();
         addNewLine(document);
-        document.add(new Chunk(IFileConstants.TOP_TEXT, prepareFont(IFileConstants.MONTSERRAT_FONT, 10)));
+        // Thank you for order text
+        addNewLineWithText(document, IFileConstants.TOP_TEXT, prepareFont(IFileConstants.MONTSERRAT_FONT, 10));
         addNewLine(document);
-        document.add(new Chunk(IFileConstants.TRIP_NAME, prepareFont(IFileConstants.LIBRE_FONT, 20)));
+
+        // Big text with destination of trip
+        addNewLineWithText(document,
+                getDestination(tripDTO).toUpperCase(),
+                prepareFont(IFileConstants.LIBRE_FONT, 20));
         addNewLines(document,4);
-        document.add(new Chunk(IFileConstants.BOOKING_TEXT, prepareFont(IFileConstants.OPENSANS_FONT,14)));
+        // You have booked tour to ...
+        addNewLineWithText(document, IFileConstants.BOOKING_TEXT + getDestination(tripDTO), prepareFont(IFileConstants.OPENSANS_FONT,14));
         addNewLine(document);
 
 
@@ -54,6 +61,10 @@ public class PdfItextGenerator implements FileGenerator<Document>{
         document.add(Chunk.NEWLINE);
     }
 
+    private void addNewLineWithText(Document document, String text, Font font) throws DocumentException {
+        document.add(new Chunk(text, font));
+    }
+
     private void addNewLines(Document document, int count) throws DocumentException {
         for(int i=0;i<count;i++){
             addNewLine(document);
@@ -70,5 +81,9 @@ public class PdfItextGenerator implements FileGenerator<Document>{
 
     private void addPaymentDetails(Document document){
 
+    }
+
+    private String getDestination(TripDTO dto){
+        return dto.getDestination().getDestination();
     }
 }

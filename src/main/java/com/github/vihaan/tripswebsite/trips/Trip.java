@@ -34,6 +34,9 @@ public class Trip {
     @Column(name = "voucher_number", nullable = false, unique = true)
     private String voucherNumber;
 
+    @Column(name = "trip_active", nullable = false)
+    private boolean isTripActive;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -46,7 +49,7 @@ public class Trip {
     }
     public Trip(LocalDateTime tripDate, Destination tripDestination,
                 String personName, int normalTickets, int reducedTickets,
-                String username, LocalDateTime orderDate, String voucherNumber, User user) {
+                String username, LocalDateTime orderDate, String voucherNumber, User user, boolean isTripActive) {
         this.tripDate = tripDate;
         this.tripDestination = tripDestination;
         this.normalTickets = normalTickets;
@@ -54,6 +57,7 @@ public class Trip {
         this.orderDate = orderDate;
         this.voucherNumber = voucherNumber;
         this.user = user;
+        this.isTripActive = isTripActive;
     }
 
     public long getId() {
@@ -128,6 +132,14 @@ public class Trip {
         this.tripDestination = tripDestination;
     }
 
+    public boolean isTripActive() {
+        return isTripActive;
+    }
+
+    public void setTripActive(boolean tripActive) {
+        isTripActive = tripActive;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -152,6 +164,7 @@ public class Trip {
                 ", reducedTickets=" + reducedTickets +
                 ", tripCost=" + tripCost +
                 ", voucherNumber='" + voucherNumber + '\'' +
+                ", isTripActive=" + isTripActive +
                 '}';
     }
 }

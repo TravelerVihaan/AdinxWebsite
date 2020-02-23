@@ -28,6 +28,8 @@ public class TripDTO {
     private String voucherNumber;
     @NotNull
     private UserDTO userDTO;
+    @NotNull
+    private boolean isTripActive;
 
 
     @NotNull
@@ -39,7 +41,8 @@ public class TripDTO {
                    @NotEmpty String personName,
                    @NotNull int normalTickets,
                    @NotNull int reducedTickets,
-                   @NotNull UserDTO userDTO
+                   @NotNull UserDTO userDTO,
+                   @NotNull boolean isTripActive
                    ) {
         this.tripDate = tripDate;
         this.personName = personName;
@@ -47,6 +50,7 @@ public class TripDTO {
         this.reducedTickets = reducedTickets;
         this.orderDate = orderDate;
         this.userDTO = userDTO;
+        this.isTripActive = isTripActive;
     }
 
     public LocalDateTime getTripDate() {
@@ -121,6 +125,14 @@ public class TripDTO {
         this.destination = destination;
     }
 
+    public boolean isTripActive() {
+        return isTripActive;
+    }
+
+    public void setTripActive(boolean tripActive) {
+        isTripActive = tripActive;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -150,6 +162,7 @@ public class TripDTO {
                 ", reducedTickets=" + reducedTickets +
                 ", tripCost=" + tripCost +
                 ", voucherNumber='" + voucherNumber + '\'' +
+                ", isTripActive=" + isTripActive +
                 '}';
     }
 }

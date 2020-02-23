@@ -21,31 +21,43 @@ public class PdfItextGenerator implements FileGenerator<Document>{
         try {
             PdfWriter.getInstance(document, new FileOutputStream(IFileConstants.TMP_FILE_PATH));
 
-        registerFonts();
-        document.open();
-        addNewLine(document);
-        // Thank you for order text
-        addNewLineWithText(document, IFileConstants.TOP_TEXT, prepareFont(IFileConstants.MONTSERRAT_FONT, 10));
-        addNewLine(document);
+            registerFonts();
+            document.open();
+            addNewLine(document);
+            // Thank you for order text
+            addNewLineWithText(document,
+                    IFileConstants.TOP_TEXT,
+                    prepareFont(IFileConstants.MONTSERRAT_FONT, 10));
+            addNewLine(document);
 
-        // Big text with destination of trip
-        addNewLineWithText(document,
-                getDestination(tripDTO).toUpperCase(),
-                prepareFont(IFileConstants.LIBRE_FONT, 20));
-        addNewLines(document,4);
-        // You have booked tour to ...
-        addNewLineWithText(document, IFileConstants.BOOKING_TEXT + getDestination(tripDTO), prepareFont(IFileConstants.OPENSANS_FONT,14));
-        addNewLine(document);
+            // Big text with destination of trip
+            addNewLineWithText(document,
+                    getDestination(tripDTO).toUpperCase(),
+                    prepareFont(IFileConstants.LIBRE_FONT, 20));
+            addNewLines(document,4);
+            // You have booked tour to ...
+            addNewLineWithText(document,
+                    IFileConstants.BOOKING_TEXT + getDestination(tripDTO),
+                    getStandardFont());
+            addNewLine(document);
+
+            addStartTripDetails(document, tripDTO);
+            addOrderDetails(document,tripDTO);
 
 
         }catch(DocumentException e){
             LoggerSingleton.getLogger(this.getClass()).warn(e.getMessage());
         }
     }
+    private Font getStandardFont(){
+        return prepareFont(IFileConstants.OPENSANS_FONT,14);
+    }
 
     private Font prepareFont(String fontType, int fontSize){
         return prepareFont(fontType, fontSize, BaseColor.BLACK);
     }
+
+
 
     private Font prepareFont(String fontType, int fontSize, BaseColor color){
         return FontFactory.getFont(fontType, fontSize, color);
@@ -71,16 +83,60 @@ public class PdfItextGenerator implements FileGenerator<Document>{
         }
     }
 
-    private void addStartTripDetails(Document document){
-
+    private void addStartTripDetails(Document document, TripDTO tripDTO) throws DocumentException {
+        // We will pick you up from ...
+        addNewLineWithText(document,
+                IFileConstants.PICK_TEXT +  tripDTO.getFullHotelName(),
+                getStandardFont());
+        // Details hotel + date + hour
+        addNewLineWithText();
+        addNewLine(document);
     }
 
-    private void addOrderDetails(Document document){
-
+    private void addOrderDetails(Document document, TripDTO tripDTO) throws DocumentException {
+        // Here are order details
+        addNewLineWithText(document, IFileConstants.DETAILS_TEXT, getStandardFont());
+        // Voucher number...
+        addNewLineWithText(document,
+                IFileConstants.VOUCHER_NUMBER + tripDTO.getVoucherNumber(),
+                getStandardFont());
+        // Tour language: English
+        addNewLineWithText(document,
+                IFileConstants.LANGUAGE + tripDTO.getVoucherNumber(),
+                getStandardFont());
+        // Client's info:
+        addNewLineWithText(document,
+                IFileConstants.CLIENT + tripDTO.getPersonName(),
+                getStandardFont());
+        // Tickets info
+        addTicketsInfo(document, tripDTO);
+        // Price ... PLN
+        addNewLineWithText(document,
+                IFileConstants.PRICE1 + tripDTO.getTripCost() + IFileConstants.PRICE2,
+                getStandardFont());
+        addPaymentDetails(document, tripDTO);
     }
 
-    private void addPaymentDetails(Document document){
+    private void addTicketsInfo(Document document, TripDTO tripDTO) throws DocumentException {
+        // Tickets
+        addNewLineWithText(document,
+                IFileConstants.TICKETS_INFO,
+                getStandardFont());
+        // Specific tickets info
+        if(tripDTO.getNormalTickets()>0){
+            addNewLineWithText(document,
+                    IFileConstants.NORMAL_TICKETS + tripDTO.getNormalTickets() + IFileConstants.TICKETS,
+                    getStandardFont());
+        }
+        if(tripDTO.getReducedTickets()>0){
+            addNewLineWithText(document,
+                    IFileConstants.REDUCED_TICKETS + tripDTO.getReducedTickets() + IFileConstants.TICKETS,
+                    getStandardFont());
+        }
+    }
 
+    private void addPaymentDetails(Document document, TripDTO tripDTO){
+        addNewLineWithText(document, IFileConstants.PAYMENT + tripDTO.get);
     }
 
     private String getDestination(TripDTO dto){

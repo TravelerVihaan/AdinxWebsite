@@ -13,15 +13,18 @@ interface IFileConstants {
     String VOUCHER_NUMBER = "Voucher number ";
     String LANGUAGE = "Tour language: English";
 
-    String TICKETS_INFO = "Tickets: ";
-    String NORMAL_TICKETS1 = "Normal - ";
-    String NORMAL_TICKETS2 = " ticket(s)";
+    String CLIENT = "Client's info: ";
 
-    String PRICE1 = "Price";
-    String PRICE2 = "PLN";
+    String TICKETS_INFO = "Tickets: ";
+    String NORMAL_TICKETS = "Normal - ";
+    String REDUCED_TICKETS = "Normal - ";
+    String TICKETS = " ticket(s)";
+
+    String PRICE1 = "Price ";
+    String PRICE2 = " PLN";
 
     String PAYMENT = "Payment : To be paid in office\n" +
-            "Order date";
+            "Order date ";
     String SIGNATURE1 = "Make it EASY with us!";
     String SIGNATURE2 = "EasyTours!";
 

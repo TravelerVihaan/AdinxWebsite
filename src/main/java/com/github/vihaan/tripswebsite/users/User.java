@@ -17,6 +17,9 @@ public class User {
     @Column(unique = true, nullable = false)
     private String username;
 
+    @Column(name = "hotel_name", unique = true, nullable = false)
+    private String fullHotelName;
+
     @Column(nullable = false)
     private String email;
 
@@ -35,9 +38,10 @@ public class User {
     private Set<Role> roles;
 
     public User() {}
-    public User(String username, String password){
+    public User(String username, String password, String fullHotelName){
         this.username = username;
         this.password = password;
+        this.fullHotelName = fullHotelName;
     }
 
     public Long getId() {
@@ -88,6 +92,14 @@ public class User {
         this.roles = roles;
     }
 
+    public String getFullHotelName() {
+        return fullHotelName;
+    }
+
+    public void setFullHotelName(String fullHotelName) {
+        this.fullHotelName = fullHotelName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -109,9 +121,9 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
+                ", fullHotelName='" + fullHotelName + '\'' +
                 ", email='" + email + '\'' +
                 ", registerDate=" + registerDate +
-                ", roles=" + roles +
                 '}';
     }
 }

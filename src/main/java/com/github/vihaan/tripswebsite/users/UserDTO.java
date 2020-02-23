@@ -21,18 +21,25 @@ public class UserDTO {
     @Size(min = 8, max = 30, message = "{user.password.length}")
     private String password;
 
+    @NotEmpty(message = "{user.empty.hotelName}")
+    private String fullHotelName;
+
+
     @NotEmpty
     private LocalDateTime registerDate;
 
     private Set<RoleDTO> roles;
 
     public UserDTO() { }
-    public UserDTO(@NotEmpty @Size(min = 5, max = 30) String username,
-                   @Email @NotEmpty String email,
-                   @NotEmpty @Size(min = 8, max = 30) String password) {
+
+    public UserDTO(@NotEmpty(message = "{user.empty.username}") @Size(min = 5, max = 30, message = "{user.username.length}") String username,
+                   @Email(message = "{user.wrong.email.syntax}") @NotEmpty(message = "{user.empty.email}") String email,
+                   @NotEmpty(message = "{user.empty.password}") @Size(min = 8, max = 30, message = "{user.password.length}") String password,
+                   @NotEmpty(message = "{user.empty.hotelName}") String fullHotelName) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.fullHotelName = fullHotelName;
     }
 
     public String getUsername() {

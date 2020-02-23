@@ -18,7 +18,7 @@ public class TripBooking {
         this.tripRepositoriesFacade = tripRepositoriesFacade;
         this.tripValidator = tripValidator;
     }
-
+    // TODO pass username and full Hotel name to trip DTO
     public void executeBooking(TripDTO tripDTO){
         if(!tripValidator.isValid(tripDTO).isEmpty())
             return; //TODO
@@ -27,8 +27,6 @@ public class TripBooking {
         Trip trip = tripMapper.convertDtoToEntity(tripDTO);
         trip.setTripDestination(prepareDestinationEntityToSave(tripDTO));
         tripRepositoriesFacade.saveTrip(trip);
-
-
     }
 
     private Destination prepareDestinationEntityToSave(TripDTO tripDTO){

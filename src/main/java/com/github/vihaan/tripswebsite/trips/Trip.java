@@ -1,5 +1,7 @@
 package com.github.vihaan.tripswebsite.trips;
 
+import com.github.vihaan.tripswebsite.users.User;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,8 +19,8 @@ public class Trip {
     @Column(name = "trip_date", nullable = false)
     private LocalDateTime tripDate;
 
-    @Column(name = "person_name", nullable = false)
-    private String personName;
+    @Column(name = "order_date", nullable = false)
+    private LocalDateTime orderDate;
 
     @Column(name = "nomral_tickets", nullable = false)
     private int normalTickets;
@@ -29,26 +31,29 @@ public class Trip {
     @Column(name = "trip_cost", nullable = false)
     private double tripCost;
 
-    @Column(nullable = false)
-    private String username;
-
-    @Column(nullable = false, unique = true)
+    @Column(name = "voucher_number", nullable = false, unique = true)
     private String voucherNumber;
 
     @ManyToOne
-    @JoinColumn(name="destination_id")
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "destination_id")
     private Destination tripDestination;
 
-    public Trip(){}
+    public Trip() {
+    }
     public Trip(LocalDateTime tripDate, Destination tripDestination,
                 String personName, int normalTickets, int reducedTickets,
-                String username) {
+                String username, LocalDateTime orderDate, String voucherNumber, User user) {
         this.tripDate = tripDate;
         this.tripDestination = tripDestination;
-        this.personName = personName;
         this.normalTickets = normalTickets;
         this.reducedTickets = reducedTickets;
-        this.username = username;
+        this.orderDate = orderDate;
+        this.voucherNumber = voucherNumber;
+        this.user = user;
     }
 
     public long getId() {
@@ -59,24 +64,20 @@ public class Trip {
         this.id = id;
     }
 
-    public LocalDateTime getTripDate() { return tripDate; }
-
-    public void setTripDate(LocalDateTime tripDate) { this.tripDate = tripDate; }
-
-    public Destination getTripDestination() {
-        return tripDestination;
+    public LocalDateTime getTripDate() {
+        return tripDate;
     }
 
-    public void setTripDestination(Destination tripDestination) {
-        this.tripDestination = tripDestination;
+    public void setTripDate(LocalDateTime tripDate) {
+        this.tripDate = tripDate;
     }
 
-    public String getPersonName() {
-        return personName;
+    public LocalDateTime getOrderDate() {
+        return orderDate;
     }
 
-    public void setPersonName(String personName) {
-        this.personName = personName;
+    public void setOrderDate(LocalDateTime orderDate) {
+        this.orderDate = orderDate;
     }
 
     public int getNormalTickets() {
@@ -95,14 +96,6 @@ public class Trip {
         this.reducedTickets = reducedTickets;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public double getTripCost() {
         return tripCost;
     }
@@ -119,17 +112,34 @@ public class Trip {
         this.voucherNumber = voucherNumber;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Destination getTripDestination() {
+        return tripDestination;
+    }
+
+    public void setTripDestination(Destination tripDestination) {
+        this.tripDestination = tripDestination;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Trip trip = (Trip) o;
-        return Objects.equals(voucherNumber, trip.voucherNumber);
+        return Objects.equals(orderDate, trip.orderDate) &&
+                Objects.equals(voucherNumber, trip.voucherNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(voucherNumber);
+        return Objects.hash(orderDate, voucherNumber);
     }
 
     @Override
@@ -137,13 +147,11 @@ public class Trip {
         return "Trip{" +
                 "id=" + id +
                 ", tripDate=" + tripDate +
-                ", personName='" + personName + '\'' +
+                ", orderDate=" + orderDate +
                 ", normalTickets=" + normalTickets +
                 ", reducedTickets=" + reducedTickets +
                 ", tripCost=" + tripCost +
-                ", username='" + username + '\'' +
                 ", voucherNumber='" + voucherNumber + '\'' +
-                ", tripDestination=" + tripDestination +
                 '}';
     }
 }

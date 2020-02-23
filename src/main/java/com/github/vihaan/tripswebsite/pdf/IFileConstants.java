@@ -36,5 +36,7 @@ interface IFileConstants {
     String OPENSANS_FONT = "OpenSans";
     String OPENSANS_FONT_PATH = "src/main/resources/fonts/OpenSans-Light.ttf";
 
+
+    @Deprecated
     String TMP_FILE_PATH = "/tmp/voucher-file.pdf";
 }

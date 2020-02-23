@@ -63,7 +63,7 @@ public class PdfGenerator implements FileGenerator<PDDocument>{
             contentStream.showText(inputText);
             contentStream.endText();
             contentStream.close();
-            document.save("/tmp/voucher-file.pdf"); // TODO
+            document.save(IFileConstants.TMP_FILE_PATH);
         }catch(IOException e){
             LoggerSingleton.getLogger(this.getClass()).warn(e.getMessage());
         }finally{

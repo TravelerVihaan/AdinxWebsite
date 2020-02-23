@@ -164,7 +164,7 @@ public class PdfItextGenerator implements FileGenerator<Document>{
     }
 
     private String getFileName(TripDTO tripDTO){
-        return tripDTO.getVoucherNumber();
+        return "voucher_" + tripDTO.getVoucherNumber();
     }
 
     String DATE_FORMAT_PATTERN = "yyyy-MM-dd HH:mm:ss";

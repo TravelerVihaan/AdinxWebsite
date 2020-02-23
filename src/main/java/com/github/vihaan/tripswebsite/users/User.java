@@ -1,7 +1,10 @@
 package com.github.vihaan.tripswebsite.users;
 
+import com.github.vihaan.tripswebsite.trips.Trip;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -29,6 +32,9 @@ public class User {
     @Column(name = "register_date", nullable = false)
     private LocalDateTime registerDate;
 
+    @OneToMany(mappedBy= "tripDestination")
+    private List<Trip> trips;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role",
             joinColumns = {@JoinColumn(name = "user_id",
@@ -42,6 +48,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.fullHotelName = fullHotelName;
+        this.registerDate = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -60,12 +67,12 @@ public class User {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getFullHotelName() {
+        return fullHotelName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setFullHotelName(String fullHotelName) {
+        this.fullHotelName = fullHotelName;
     }
 
     public String getEmail() {
@@ -76,12 +83,28 @@ public class User {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public LocalDateTime getRegisterDate() {
         return registerDate;
     }
 
     public void setRegisterDate(LocalDateTime registerDate) {
         this.registerDate = registerDate;
+    }
+
+    public List<Trip> getTrips() {
+        return trips;
+    }
+
+    public void setTrips(List<Trip> trips) {
+        this.trips = trips;
     }
 
     public Set<Role> getRoles() {
@@ -92,28 +115,19 @@ public class User {
         this.roles = roles;
     }
 
-    public String getFullHotelName() {
-        return fullHotelName;
-    }
-
-    public void setFullHotelName(String fullHotelName) {
-        this.fullHotelName = fullHotelName;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) &&
-                Objects.equals(username, user.username) &&
-                Objects.equals(email, user.email) &&
+        return Objects.equals(username, user.username) &&
+                Objects.equals(fullHotelName, user.fullHotelName) &&
                 Objects.equals(registerDate, user.registerDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, email, registerDate);
+        return Objects.hash(username, fullHotelName, registerDate);
     }
 
     @Override
@@ -123,6 +137,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", fullHotelName='" + fullHotelName + '\'' +
                 ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
                 ", registerDate=" + registerDate +
                 '}';
     }

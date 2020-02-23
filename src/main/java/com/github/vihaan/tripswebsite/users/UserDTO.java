@@ -1,9 +1,12 @@
 package com.github.vihaan.tripswebsite.users;
 
+import com.github.vihaan.tripswebsite.trips.Trip;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -24,11 +27,12 @@ public class UserDTO {
     @NotEmpty(message = "{user.empty.hotelName}")
     private String fullHotelName;
 
-
     @NotEmpty
     private LocalDateTime registerDate;
 
     private Set<RoleDTO> roles;
+
+    private List<Trip> trips;
 
     public UserDTO() { }
 
@@ -50,6 +54,14 @@ public class UserDTO {
         this.username = username;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -58,12 +70,12 @@ public class UserDTO {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public String getFullHotelName() {
+        return fullHotelName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setFullHotelName(String fullHotelName) {
+        this.fullHotelName = fullHotelName;
     }
 
     public LocalDateTime getRegisterDate() {
@@ -82,19 +94,27 @@ public class UserDTO {
         this.roles = roles;
     }
 
+    public List<Trip> getTrips() {
+        return trips;
+    }
+
+    public void setTrips(List<Trip> trips) {
+        this.trips = trips;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserDTO userDTO = (UserDTO) o;
         return Objects.equals(username, userDTO.username) &&
-                Objects.equals(email, userDTO.email) &&
+                Objects.equals(fullHotelName, userDTO.fullHotelName) &&
                 Objects.equals(registerDate, userDTO.registerDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, email, registerDate);
+        return Objects.hash(username, fullHotelName, registerDate);
     }
 
     @Override
@@ -102,8 +122,9 @@ public class UserDTO {
         return "UserDTO{" +
                 "username='" + username + '\'' +
                 ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", fullHotelName='" + fullHotelName + '\'' +
                 ", registerDate=" + registerDate +
-                ", roles=" + roles +
                 '}';
     }
 }

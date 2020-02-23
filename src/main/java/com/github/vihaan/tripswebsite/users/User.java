@@ -32,6 +32,9 @@ public class User {
     @Column(name = "register_date", nullable = false)
     private LocalDateTime registerDate;
 
+    @Column(name = "hotel_address", nullable = false)
+    private String hotelAddress;
+
     @OneToMany(mappedBy= "tripDestination")
     private List<Trip> trips;
 
@@ -44,11 +47,12 @@ public class User {
     private Set<Role> roles;
 
     public User() {}
-    public User(String username, String password, String fullHotelName){
+    public User(String username, String password, String fullHotelName, String hotelAddress){
         this.username = username;
         this.password = password;
         this.fullHotelName = fullHotelName;
         this.registerDate = LocalDateTime.now();
+        this.hotelAddress = hotelAddress;
     }
 
     public Long getId() {
@@ -115,6 +119,14 @@ public class User {
         this.roles = roles;
     }
 
+    public String getHotelAddress() {
+        return hotelAddress;
+    }
+
+    public void setHotelAddress(String hotelAddress) {
+        this.hotelAddress = hotelAddress;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -137,8 +149,8 @@ public class User {
                 ", username='" + username + '\'' +
                 ", fullHotelName='" + fullHotelName + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", registerDate=" + registerDate +
+                ", hotelAddress='" + hotelAddress + '\'' +
                 '}';
     }
 }

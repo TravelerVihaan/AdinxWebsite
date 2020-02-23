@@ -2,6 +2,7 @@ package com.github.vihaan.tripswebsite.users;
 
 import com.github.vihaan.tripswebsite.trips.Trip;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -30,6 +31,9 @@ public class UserDTO {
     @NotEmpty
     private LocalDateTime registerDate;
 
+    @NotEmpty(message = "{user.empty.hotelAddress}")
+    private String hotelAddress;
+
     private Set<RoleDTO> roles;
 
     private List<Trip> trips;
@@ -39,11 +43,13 @@ public class UserDTO {
     public UserDTO(@NotEmpty(message = "{user.empty.username}") @Size(min = 5, max = 30, message = "{user.username.length}") String username,
                    @Email(message = "{user.wrong.email.syntax}") @NotEmpty(message = "{user.empty.email}") String email,
                    @NotEmpty(message = "{user.empty.password}") @Size(min = 8, max = 30, message = "{user.password.length}") String password,
-                   @NotEmpty(message = "{user.empty.hotelName}") String fullHotelName) {
+                   @NotEmpty(message = "{user.empty.hotelName}") String fullHotelName,
+                   @NotEmpty(message = "{user.empty.hotelAddress}") String hotelAddress) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.fullHotelName = fullHotelName;
+        this.hotelAddress = hotelAddress;
     }
 
     public String getUsername() {
@@ -86,6 +92,14 @@ public class UserDTO {
         this.registerDate = registerDate;
     }
 
+    public String getHotelAddress() {
+        return hotelAddress;
+    }
+
+    public void setHotelAddress(String hotelAddress) {
+        this.hotelAddress = hotelAddress;
+    }
+
     public Set<RoleDTO> getRoles() {
         return roles;
     }
@@ -122,9 +136,9 @@ public class UserDTO {
         return "UserDTO{" +
                 "username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", fullHotelName='" + fullHotelName + '\'' +
                 ", registerDate=" + registerDate +
+                ", hotelAddress='" + hotelAddress + '\'' +
                 '}';
     }
 }

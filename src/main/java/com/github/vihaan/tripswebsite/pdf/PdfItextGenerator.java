@@ -89,7 +89,7 @@ public class PdfItextGenerator implements FileGenerator<Document>{
                 IFileConstants.PICK_TEXT +  tripDTO.getUserDTO().getFullHotelName(),
                 getStandardFont());
         // Details hotel + date + hour
-        addNewLineWithText();
+        addNewLineWithText(document, tripDTO.getUserDTO().getHotelAddress(), getStandardFont());
         addNewLine(document);
     }
 

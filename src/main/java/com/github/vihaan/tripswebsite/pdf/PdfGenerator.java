@@ -36,8 +36,9 @@ public class PdfGenerator implements FileGenerator<PDDocument>{
     }
 
     @Override
-    public void generate(TripDTO tripDTO){
+    public PDDocument generate(TripDTO tripDTO){
         genrateText(IFileConstants.MONTSERRAT_FONT, 12, IFileConstants.TOP_TEXT);
+        return null;
     }
 
     private float[] calculateCenterOfDocument(String inputText) throws IOException {
@@ -68,7 +69,7 @@ public class PdfGenerator implements FileGenerator<PDDocument>{
         }finally{
             closeStream(contentStream);
         }
-        return null;
+        return contentStream;
     }
 
     private void closeStream(Closeable closeable){

@@ -7,6 +7,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
@@ -17,10 +18,10 @@ import java.util.Set;
 public class PdfItextGenerator implements FileGenerator<Document>{
 
     @Override
-    public void generate(TripDTO tripDTO) throws IOException {
+    public Document generate(TripDTO tripDTO) throws IOException {
         Document document = new Document(PageSize.A4,20, 20, 20, 20);
         try {
-            PdfWriter.getInstance(document, new FileOutputStream(IFileConstants.TMP_FILE_PATH));
+            PdfWriter.getInstance(document, new FileOutputStream(getFileName(tripDTO)));
 
             registerFonts();
             document.open();
@@ -47,11 +48,13 @@ public class PdfItextGenerator implements FileGenerator<Document>{
             addTicketsInfo(document,tripDTO);
             addPaymentDetails(document,tripDTO);
             addFinalizeInfo(document);
-            document.close();
-            //TODO return prepared document
-        }catch(DocumentException e){
+
+        }catch(DocumentException e) {
             LoggerSingleton.getLogger(this.getClass()).warn(e.getMessage());
+        }finally{
+            document.close();
         }
+        return document;
     }
     private Font getStandardFont(){
         return prepareFont(IFileConstants.OPENSANS_FONT,14);
@@ -157,6 +160,12 @@ public class PdfItextGenerator implements FileGenerator<Document>{
     }
 
     private DateTimeFormatter formatDate(){
-        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return DateTimeFormatter.ofPattern(DATE_FORMAT_PATTERN);
     }
+
+    private String getFileName(TripDTO tripDTO){
+        return tripDTO.getVoucherNumber();
+    }
+
+    String DATE_FORMAT_PATTERN = "yyyy-MM-dd HH:mm:ss";
 }

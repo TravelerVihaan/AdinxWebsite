@@ -39,7 +39,6 @@ public class UserDTO {
     private List<Trip> trips;
 
     public UserDTO() { }
-
     public UserDTO(@NotEmpty(message = "{user.empty.username}") @Size(min = 5, max = 30, message = "{user.username.length}") String username,
                    @Email(message = "{user.wrong.email.syntax}") @NotEmpty(message = "{user.empty.email}") String email,
                    @NotEmpty(message = "{user.empty.password}") @Size(min = 8, max = 30, message = "{user.password.length}") String password,

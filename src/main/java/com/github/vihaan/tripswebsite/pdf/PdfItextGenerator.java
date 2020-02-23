@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 @Service
@@ -43,8 +44,9 @@ public class PdfItextGenerator implements FileGenerator<Document>{
 
             addStartTripDetails(document, tripDTO);
             addOrderDetails(document,tripDTO);
-
-
+            addTicketsInfo(document,tripDTO);
+            addPaymentDetails(document,tripDTO);
+            addFinalizeInfo(document);
         }catch(DocumentException e){
             LoggerSingleton.getLogger(this.getClass()).warn(e.getMessage());
         }
@@ -56,8 +58,6 @@ public class PdfItextGenerator implements FileGenerator<Document>{
     private Font prepareFont(String fontType, int fontSize){
         return prepareFont(fontType, fontSize, BaseColor.BLACK);
     }
-
-
 
     private Font prepareFont(String fontType, int fontSize, BaseColor color){
         return FontFactory.getFont(fontType, fontSize, color);
@@ -86,7 +86,7 @@ public class PdfItextGenerator implements FileGenerator<Document>{
     private void addStartTripDetails(Document document, TripDTO tripDTO) throws DocumentException {
         // We will pick you up from ...
         addNewLineWithText(document,
-                IFileConstants.PICK_TEXT +  tripDTO.getFullHotelName(),
+                IFileConstants.PICK_TEXT +  tripDTO.getUserDTO().getFullHotelName(),
                 getStandardFont());
         // Details hotel + date + hour
         addNewLineWithText();
@@ -133,13 +133,28 @@ public class PdfItextGenerator implements FileGenerator<Document>{
                     IFileConstants.REDUCED_TICKETS + tripDTO.getReducedTickets() + IFileConstants.TICKETS,
                     getStandardFont());
         }
+        addNewLineWithText(document, IFileConstants.PRICE1 + tripDTO.getTripCost() + IFileConstants.PRICE2, getStandardFont());
     }
 
-    private void addPaymentDetails(Document document, TripDTO tripDTO){
-        addNewLineWithText(document, IFileConstants.PAYMENT + tripDTO.get);
+    private void addPaymentDetails(Document document, TripDTO tripDTO) throws DocumentException {
+        addNewLineWithText(document, IFileConstants.PAYMENT, getStandardFont());
+        addNewLineWithText(document,
+                IFileConstants.ORDER_DATE + tripDTO.getOrderDate().format(formatDate()),
+                getStandardFont());
+    }
+
+    private void addFinalizeInfo(Document document) throws DocumentException {
+        addNewLineWithText(document,IFileConstants.SIGNATURE1, getStandardFont());
+        addNewLine(document);
+        addNewLineWithText(document, IFileConstants.SIGNATURE2, getStandardFont());
+        addNewLine(document);
     }
 
     private String getDestination(TripDTO dto){
         return dto.getDestination().getDestination();
+    }
+
+    private DateTimeFormatter formatDate(){
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     }
 }

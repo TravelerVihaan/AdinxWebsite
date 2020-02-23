@@ -20,11 +20,11 @@ interface IFileConstants {
     String REDUCED_TICKETS = "Normal - ";
     String TICKETS = " ticket(s)";
 
-    String PRICE1 = "Price ";
+    String PRICE1 = "Total price: ";
     String PRICE2 = " PLN";
 
-    String PAYMENT = "Payment : To be paid in office\n" +
-            "Order date ";
+    String PAYMENT = "Payment : To be paid in office";
+    String ORDER_DATE = "Order date ";
     String SIGNATURE1 = "Make it EASY with us!";
     String SIGNATURE2 = "EasyTours!";
 

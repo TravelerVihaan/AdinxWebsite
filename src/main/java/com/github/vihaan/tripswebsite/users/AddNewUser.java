@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,17 +25,19 @@ public class AddNewUser {
         this.userValidator = userValidator;
     }
 
-    public String addNewUser(UserDTO userDTO){
-        if(!userValidator.isValid(userDTO))
-            return null; //TODO
-        userDTO.setRegisterDate(LocalDateTime.now());
-        IMapper<User,UserDTO> mapper = userRepositoriesFacade.getUserMapper();
-        User user = mapper.convertDtoToEntity(userDTO);
-        Set<RoleDTO> rolesDtoSet = userDTO.getRoles();
-        Set<Role> roles = rolesDtoSet.stream().map(role -> findAndConvertToRole(role.getRole())).collect(Collectors.toSet());
-        user.setRoles(roles);
-        userRepositoriesFacade.saveUser(user);
-        return "";
+    public List<String> addNewUser(UserDTO userDTO){
+        List<String> errors = Collections.emptyList();
+        errors.addAll(userValidator.isValid(userDTO));
+        if(errors.isEmpty()) {
+            userDTO.setRegisterDate(LocalDateTime.now());
+            IMapper<User, UserDTO> mapper = userRepositoriesFacade.getUserMapper();
+            User user = mapper.convertDtoToEntity(userDTO);
+            Set<RoleDTO> rolesDtoSet = userDTO.getRoles();
+            Set<Role> roles = rolesDtoSet.stream().map(role -> findAndConvertToRole(role.getRole())).collect(Collectors.toSet());
+            user.setRoles(roles);
+            userRepositoriesFacade.saveUser(user);
+        }
+        return errors;
     }
 
     private Role findAndConvertToRole(String role){

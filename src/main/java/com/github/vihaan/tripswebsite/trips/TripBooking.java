@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
+
 @Service
 public class TripBooking {
 
@@ -18,15 +21,19 @@ public class TripBooking {
         this.tripRepositoriesFacade = tripRepositoriesFacade;
         this.tripValidator = tripValidator;
     }
-    // TODO pass username and full Hotel name to trip DTO
-    public void executeBooking(TripDTO tripDTO){
-        if(!tripValidator.isValid(tripDTO).isEmpty())
-            return; //TODO
-        tripDTO.setTripCost(calculateTripCost(tripDTO));
-        IMapper<Trip, TripDTO> tripMapper = tripRepositoriesFacade.getTripMapper();
-        Trip trip = tripMapper.convertDtoToEntity(tripDTO);
-        trip.setTripDestination(prepareDestinationEntityToSave(tripDTO));
-        tripRepositoriesFacade.saveTrip(trip);
+
+    public List<String> executeBooking(TripDTO tripDTO){
+        List<String> errors = Collections.emptyList();
+        errors.addAll(tripValidator.isValid(tripDTO));
+        if(errors.isEmpty()){
+            tripDTO.setTripCost(calculateTripCost(tripDTO));
+            IMapper<Trip, TripDTO> tripMapper = tripRepositoriesFacade.getTripMapper();
+            Trip trip = tripMapper.convertDtoToEntity(tripDTO);
+            trip.setTripDestination(prepareDestinationEntityToSave(tripDTO));
+            tripRepositoriesFacade.saveTrip(trip);
+        }
+        return errors;
+
     }
 
     private Destination prepareDestinationEntityToSave(TripDTO tripDTO){

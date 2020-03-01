@@ -12,7 +12,7 @@ public class TripBookingController {
 
     private TripRepositoriesFacade tripRepositoriesFacade;
 
-    @GetMapping(IControllersStrings.BOOK_TRIP_PATH)
+    @GetMapping("/trip-booking")
     public String bookTrip(Model model){
         model.addAttribute("newTrip", new TripDTO());
         model.addAttribute("destinations", tripRepositoriesFacade.getAllDestinationDtos());

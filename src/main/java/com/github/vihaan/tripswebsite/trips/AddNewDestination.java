@@ -23,7 +23,7 @@ public class AddNewDestination {
     }
 
     public void addNewDestination(DestinationDTO destinationDTO){
-        if(!destinationValidator.isValid(destinationDTO))
+        if(!destinationValidator.isValid(destinationDTO).isEmpty())
             return; // TODO
         Destination destination = destinationMapper.convertDtoToEntity(destinationDTO);
         destinationRepository.save(destination);

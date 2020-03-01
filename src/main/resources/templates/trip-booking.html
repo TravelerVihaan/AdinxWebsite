@@ -22,11 +22,19 @@
                 <br>
                 <form th:action="@{/process-booking}" method="POST" th:object="${newTrip}">
                     <div class="form-group">
-                        <label for="tripDate">Trip date:</label>
+                        <label for="setTripDate">Trip date</label>
                         <input type="date" class="form-control" th:value="*{tripDate}" th:field="*{tripDate}" placeholder="Choose trip date">
                     </div>
                     <br>
-
+                    <label for="setPersonName">Name and surname</label>
+                    <input type="text" class="form-control" th:value="*{personName}" th:field="*{personName}" placeholder="Name and surname"/>
+                    <br>
+                    <label for="setNormalTickets">Normal tickets number</label>
+                    <input type="number" class="form-control" th:value="*{personName}" th:field="*{personName}" placeholder="Name and surname"/>
+                    <br>
+                    <label for="setReducedTickets">Normal tickets number</label>
+                    <input type="number" class="form-control" th:value="*{personName}" th:field="*{personName}" placeholder="Name and surname"/>
+                    <br>
 
                     <button type="submit" class="btn btn-dark btn-block">Submit booking</button>
                 </form>

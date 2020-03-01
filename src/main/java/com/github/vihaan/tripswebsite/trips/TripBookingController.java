@@ -13,7 +13,8 @@ public class TripBookingController {
 
     @GetMapping(IControllersStrings.BOOK_TRIP_PATH)
     public String bookTrip(Model model){
-        //model.addAttribute()
+        model.addAttribute("newTrip", new TripDTO());
+        model.addAttribute("destinations", tripRepositoriesFacade.getAllDestinationDtos());
         return IControllersStrings.PROCESS_BOOKING;
     }
 

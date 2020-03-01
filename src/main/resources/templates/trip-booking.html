@@ -37,6 +37,12 @@
                     <label for="setReducedTickets">Normal tickets number</label>
                     <input type="number" class="form-control" th:value="*{reducedTickets}" th:field="*{reducedTickets}" placeholder="Name and surname"/>
                     <br>
+                    <select class="form-control" th:object="${destination}" th:field="*{destination}" name="destination">
+                        <option th:each="destination : ${destinations}" th:text="${destination.<TODO>}">
+
+                        </option>
+                    </select>
+                    <br>
                     <button type="submit" class="btn btn-dark btn-block">Submit booking</button>
                 </form>
             </div>

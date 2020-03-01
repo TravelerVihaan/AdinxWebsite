@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html 	xmlns="http://www.w3.org/1999/xhtml"
-         xmlns:th="http://www.thymeleaf.org"
-         xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +20,8 @@
                     New trip booking:
                 </p>
                 <br>
-                <form th:action="@{/process-booking}" method="POST" th:object="${newTrip}">
+                <!--/*@thymesVar id="newTrip" type="com.github.vihaan.tripswebsite.trips.TripDTO"*/-->
+                <form action="#" th:action="@{/process-booking}" method="POST" th:object="${newTrip}">
 
                     <br>
                     <div class="form-group">
@@ -37,8 +38,10 @@
                     <label for="setReducedTickets">Normal tickets number</label>
                     <input type="number" class="form-control" th:value="*{reducedTickets}" th:field="*{reducedTickets}" placeholder="Name and surname"/>
                     <br>
+                    <!--/*@thymesVar id="destination" type="com.github.vihaan.tripswebsite.trips.DestinationDTO"*/-->
                     <select class="form-control" th:object="${destination}" th:field="*{destination}" name="destination">
-                        <option th:each="destination : ${destinations}" th:text="${destination.<TODO>}">
+                        <!--/*@thymesVar id="destinations" type="List<com.github.vihaan.tripswebsite.trips.DestinationDTO>"*/-->
+                        <option th:each="destination : ${destinations}" th:text="${destination.getDestination()}">
 
                         </option>
                     </select>

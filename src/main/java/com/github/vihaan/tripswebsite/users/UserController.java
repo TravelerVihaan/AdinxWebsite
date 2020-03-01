@@ -1,5 +1,6 @@
-package com.github.vihaan.tripswebsite.controller;
+package com.github.vihaan.tripswebsite.users;
 
+import com.github.vihaan.tripswebsite.controller.IControllersStrings;
 import com.github.vihaan.tripswebsite.users.UserDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

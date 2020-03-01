@@ -4,6 +4,7 @@ import com.github.vihaan.tripswebsite.controller.IControllersStrings;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -19,7 +20,7 @@ public class TripBookingController {
     }
 
     @PostMapping(IControllersStrings.PROCESS_BOOKING_PATH)
-    public String executeBooking(){
+    public String executeBooking(@ModelAttribute TripDTO newTrip){
         return IControllersStrings.BOOKING_RESULT;
     }
 }

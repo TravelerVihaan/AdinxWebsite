@@ -5,7 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 class UserRepositoriesFacade {
@@ -16,8 +19,8 @@ class UserRepositoriesFacade {
     private IMapper<User, UserDTO> userMapper;
 
     @Autowired
-    UserRepositoriesFacade(@Qualifier("roleMapper") IMapper roleMapper,
-                                  @Qualifier("userMapper")IMapper userMapper,
+    UserRepositoriesFacade(@Qualifier("roleMapper") IMapper<Role, RoleDTO> roleMapper,
+                                  @Qualifier("userMapper")IMapper<User, UserDTO> userMapper,
                                   UserRepository userRepository,
                                   RoleRepository roleRepository
                                   ) {
@@ -27,17 +30,29 @@ class UserRepositoriesFacade {
         this.userMapper = userMapper;
     }
 
-    IMapper getRoleMapper(){
+    private IMapper<Role, RoleDTO> getRoleMapper(){
         return roleMapper;
     }
 
-    IMapper getUserMapper(){
+    private IMapper<User, UserDTO> getUserMapper(){
         return userMapper;
     }
 
-    UserDTO getUserDtoByUsername(String username){
-        User user = userRepository.findByUsername(username).orElseThrow();
-        return userMapper.convertEntityToDto(user);
+    Optional<UserDTO> getUserDtoByUsername(String username) throws NoSuchElementException {
+        try {
+            User user = userRepository.findByUsername(username).orElseThrow(NoSuchElementException::new);
+            return Optional.of(userMapper.convertEntityToDto(user));
+        }catch(NoSuchElementException e){
+            return Optional.empty();
+        }
+    }
+
+    List<UserDTO> getAllUserDtos(){
+        return userRepository
+                .findAll()
+                .stream()
+                .map(user -> userMapper.convertEntityToDto(user))
+                .collect(Collectors.toList());
     }
 
     Optional<User> getUserByUsername(String username) {

@@ -15,7 +15,7 @@ public enum HttpStatusEnum {
         this.response = response;
     }
 
-    HttpStatus getResponse(){
+    public HttpStatus getResponse(){
         return response;
     }
 

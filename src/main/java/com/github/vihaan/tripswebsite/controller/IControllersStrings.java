@@ -19,10 +19,8 @@ public interface IControllersStrings {
     String TRIP = "trip" + IControllersStrings.ID_PATH;
 
     //User Controller
-    String REGISTER_PAGE = "register-page";
-    String REGISTER_PAGE_PATH = "/register-page";
-    String REGISTRATION_RESULT = "registration-result";
-    String REGISTRATION_PATH = "/registration";
+    String USERS_MAPPING = "/users";
+    String USERNAME_PATH = "/{username}";
 
     //Destination Controller
     String DESTINATIONS_LIST_PATH = "/destinations";

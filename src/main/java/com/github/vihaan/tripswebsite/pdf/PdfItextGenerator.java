@@ -51,6 +51,7 @@ public class PdfItextGenerator implements FileGenerator<Document>{
 
         }catch(DocumentException e) {
             LoggerSingleton.getLogger(this.getClass()).warn(e.getMessage());
+            return null;
         }finally{
             document.close();
         }

@@ -6,7 +6,7 @@ Spring Boot 2<br>
 Java 13<br>
 MySQL<br>
 Junit5 in tests<br>
-Thymeleaf + HTML + Bootstrap<br>
+REST<br>
 
 ## Packaging
 Fat Jar by Maven

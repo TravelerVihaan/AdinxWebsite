@@ -18,6 +18,11 @@ Service allows users to make reservations for trips, fill form with information 
 ### REST API<br>
 Below I presemted REST endpoints 
 Fpr Users:
-GET ```/users```<br> : Main endpoint for Users entitiies operation, Returns reposne with collection of objects loaded from database
-GET ```/users/{username}: Endpoint for user page adninistration - get UserDTO by username, which is unique
-POST ```/users``` Cpmsume jsom with TripDTO informations, and transfer ot tp Tro[. amd mext save om database. of tke sa,e iserma,e is not exists alreadu om data spirce
+* Users
+GET ```/users```<br> : Main endpoint for Users entitiies operation, Returns reposne with collection of objects loaded from database<br>
+GET  ```/users/{username}```<br> Endpoint for user page adninistration - get UserDTO by username, which is unique<br>
+POST ```/users```<br> Cpmsume jsom with TripDTO informations, and transfer ot tp Tro[. amd mext save om database. of tke sa,e iserma,e is not exists alreadu om data spirce<br>
+
+* Trips
+
+

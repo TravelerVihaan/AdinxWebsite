@@ -1,6 +1,7 @@
 package com.github.vihaan.tripswebsite.trips;
 
 import com.github.vihaan.tripswebsite.controller.IControllersStrings;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,11 @@ import java.util.Set;
 public class TripController {
 
     private TripRepositoriesFacade tripRepositoriesFacade;
+
+    @Autowired
+    public TripController(TripRepositoriesFacade tripRepositoriesFacade){
+        this.tripRepositoriesFacade =tripRepositoriesFacade;
+    }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<TripDTO>> getAllTrips(){

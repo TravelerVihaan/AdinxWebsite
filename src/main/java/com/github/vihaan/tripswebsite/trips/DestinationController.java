@@ -1,15 +1,17 @@
 package com.github.vihaan.tripswebsite.trips;
 
 import com.github.vihaan.tripswebsite.controller.IControllersStrings;
-import com.github.vihaan.tripswebsite.trips.DestinationService;
+import com.github.vihaan.tripswebsite.users.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
+@RequestMapping(IControllersStrings.DESTINATIONS_MAPPING)
 public class DestinationController {
 
     private TripRepositoriesFacade tripRepositoriesFacade;
@@ -19,19 +21,15 @@ public class DestinationController {
         this.tripRepositoriesFacade = tripRepositoriesFacade;
     }
 
-    @GetMapping(IControllersStrings.DESTINATIONS_LIST_PATH)
-    public String getDestinations(Model model){
-        model.addAttribute("destinationList",tripRepositoriesFacade.getAllDestinationDtos());
-        return IControllersStrings.DESTINATIONS_LIST;
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<DestinationDTO>> getDestinations(Model model){
+        List<DestinationDTO> destinations = tripRepositoriesFacade.getAllDestinationDtos();
+        return ResponseEntity.ok(destinations);
     }
 
-    @GetMapping(IControllersStrings.DESTINATION_PATH)
-    public String getDestinations(@PathVariable long id, Model model){
-        return IControllersStrings.DESTINATION;
+    @GetMapping(path = IControllersStrings.DESTINATIONS_NAME, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<DestinationDTO> getDestination(@PathVariable String destinationName){
+        return ResponseEntity.of(tripRepositoriesFacade.getDestinationDtoByName(destinationName));
     }
 
-    @PostMapping("/create-destination")
-    public String createDestination(){
-        return IControllersStrings.DESTINATIONS_LIST_PATH;
-    }
 }

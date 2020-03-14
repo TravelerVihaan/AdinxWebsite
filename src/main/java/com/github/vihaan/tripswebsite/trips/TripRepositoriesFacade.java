@@ -18,29 +18,23 @@ class TripRepositoriesFacade {
     private DestinationRepository destinationRepository;
     private IMapper<Trip, TripDTO> tripMapper;
     private IMapper<Destination, DestinationDTO> destinationMapper;
+    private TripBooking tripBooking;
 
     @Autowired
     TripRepositoriesFacade(@Qualifier("destinationMapper") IMapper<Destination, DestinationDTO> destinationMapper,
                                   @Qualifier("tripMapper")IMapper<Trip, TripDTO> tripMapper,
                                   TripRepository tripRepository,
-                                  DestinationRepository destinationRepository) {
+                                  DestinationRepository destinationRepository,
+                                  TripBooking tripBooking) {
         this.tripRepository = tripRepository;
         this.destinationRepository = destinationRepository;
         this.tripMapper = tripMapper;
         this.destinationMapper = destinationMapper;
+        this.tripBooking = tripBooking;
     }
 
     IMapper<Trip, TripDTO> getTripMapper(){ return tripMapper;}
     IMapper<Destination, DestinationDTO>  getDestinationMapper(){ return destinationMapper;}
-
-    DestinationDTO getDestinationDtoByDestination(String dest){
-        Destination destination = destinationRepository.findByDestination(dest).orElseThrow();
-        return destinationMapper.convertEntityToDto(destination);
-    }
-
-    Optional<Destination> getDestinationByName(String dest){
-        return destinationRepository.findByDestination(dest);
-    }
 
     List<Destination> getAllDestinations(){
         return destinationRepository.findAll();
@@ -66,6 +60,24 @@ class TripRepositoriesFacade {
         }
     }
 
+    Optional<DestinationDTO> getDestinationDtoByName(String destinationName){
+          try {
+                Destination destination = destinationRepository.findByDestination(destinationName).orElseThrow(NoSuchElementException::new);
+                return Optional.of(destinationMapper.convertEntityToDto(destination));
+            }catch(NoSuchElementException e){
+                return Optional.empty();
+            }
+    }
+
+    Optional<Destination> getDestinationByName(String destinationName){
+        try {
+            Destination destination = destinationRepository.findByDestination(destinationName).orElseThrow(NoSuchElementException::new);
+            return Optional.of(destination);
+        }catch(NoSuchElementException e){
+            return Optional.empty();
+        }
+    }
+
     List<TripDTO> getAllTripDtos(){
         return tripRepository.findAll()
                 .stream()
@@ -84,6 +96,10 @@ class TripRepositoriesFacade {
 
     void saveTrip(Trip trip){
         tripRepository.save(trip);
+    }
+
+    List<String> doExecuteTripBooking(TripDTO tripDTO){
+        return tripBooking.executeBooking(tripDTO);
     }
 
     void saveDestination(Destination destination){

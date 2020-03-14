@@ -23,8 +23,8 @@ public interface IControllersStrings {
     String USERNAME_PATH = "/{username}";
 
     //Destination Controller
-    String DESTINATIONS_LIST_PATH = "/destinations";
-    String DESTINATIONS_LIST = "destinations";
+    String DESTINATIONS_MAPPING = "/destinations";
+    String DESTINATIONS_NAME = "/{destinationName}";
     String DESTINATION_PATH = "/destinations" + IControllersStrings.ID_PATH;
     String DESTINATION = "destination";
 

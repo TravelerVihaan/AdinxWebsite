@@ -1,11 +1,13 @@
 package com.github.vihaan.tripswebsite.trips;
 
 import com.github.vihaan.tripswebsite.controller.IControllersStrings;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -30,10 +32,9 @@ public class TripController {
     public ResponseEntity<List<String>> addTripBooking(@RequestBody TripDTO trip){
         List<String> errors = tripRepositoriesFacade.doExecuteTripBooking(trip);
         if(errors.isEmpty()) {
-            return ResponseEntity.ok(errors);
+            return ResponseEntity.ok(Collections.emptyList());
         }
-        //TODO bad request response with list of errors
-        return ResponseEntity.ok(errors);
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
 

@@ -5,11 +5,11 @@ Web service designed for my friend's company
 Spring Boot 2<br>
 Java 13<br>
 MySQL<br>
-Junit5 in tests<br>
+Junit 5 in tests<br>
 REST<br>
 
 ## Packaging
-Fat Jar by Maven
+``Fat Jar``` by Maven
 
 ### Only backend side
 
@@ -21,8 +21,12 @@ Fpr Users:
 * Users
 GET ```/users```<br> : Main endpoint for Users entitiies operation, Returns reposne with collection of objects loaded from database<br>
 GET  ```/users/{username}```<br> Endpoint for user page adninistration - get UserDTO by username, which is unique<br>
-POST ```/users```<br> Cpmsume jsom with TripDTO informations, and transfer ot tp Tro[. amd mext save om database. of tke sa,e iserma,e is not exists alreadu om data spirce<br>
+POST ```/users```<br> Cpmsume jsom with UserDTO informations, and transfer it to User Emtoty. If trip aleardy exosts om datanase. them saving object to DB woll not ne performed.
 
 * Trips
+GET ```/trips```<br> : Main endpoint for Trips entitiies operation, Returns reposne with collection of objects loaded from database<br>
+GET  ```/trips/{username}```<br> Endpoint for trip page adninistration - get TripDTO by voucher number, which is unique<br>
+POST ```/trips```<br> Cpmsume jsom with TripDTO informations, and transfer ot tp Tro[. amd mext save om database. of tke sa,e iserma,e is not exists alreadu om data spirce<br>
+
 
 

@@ -38,7 +38,7 @@ class UserRepositoriesFacade {
         return userMapper;
     }
 
-    Optional<UserDTO> getUserDtoByUsername(String username) throws NoSuchElementException {
+    Optional<UserDTO> getUserDtoByUsername(String username) {
         try {
             User user = userRepository.findByUsername(username).orElseThrow(NoSuchElementException::new);
             return Optional.of(userMapper.convertEntityToDto(user));

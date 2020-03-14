@@ -13,8 +13,8 @@ public interface IControllersStrings {
     String BOOKING_RESULT = "booking-result";
 
     //Trips List Controller
-    String TRIPS_LIST = "trips";
-    String TRIPS_LIST_PATH = "/trips";
+    String TRIPS_MAPPING = "/trips";
+    String TRIP_NUMBER = "/{tripNumber}";
     String TRIP_PATH = "/trip" + IControllersStrings.ID_PATH;
     String TRIP = "trip" + IControllersStrings.ID_PATH;
 

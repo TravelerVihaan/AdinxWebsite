@@ -1,11 +1,13 @@
 package com.github.vihaan.tripswebsite.trips;
 
 import com.github.vihaan.tripswebsite.mappers.IMapper;
+import com.github.vihaan.tripswebsite.users.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -18,8 +20,8 @@ class TripRepositoriesFacade {
     private IMapper<Destination, DestinationDTO> destinationMapper;
 
     @Autowired
-    TripRepositoriesFacade(@Qualifier("destinationMapper") IMapper destinationMapper,
-                                  @Qualifier("tripMapper")IMapper tripMapper,
+    TripRepositoriesFacade(@Qualifier("destinationMapper") IMapper<Destination, DestinationDTO> destinationMapper,
+                                  @Qualifier("tripMapper")IMapper<Trip, TripDTO> tripMapper,
                                   TripRepository tripRepository,
                                   DestinationRepository destinationRepository) {
         this.tripRepository = tripRepository;
@@ -28,8 +30,8 @@ class TripRepositoriesFacade {
         this.destinationMapper = destinationMapper;
     }
 
-    IMapper getTripMapper(){ return tripMapper;}
-    IMapper getDestinationMapper(){ return destinationMapper;}
+    IMapper<Trip, TripDTO> getTripMapper(){ return tripMapper;}
+    IMapper<Destination, DestinationDTO>  getDestinationMapper(){ return destinationMapper;}
 
     DestinationDTO getDestinationDtoByDestination(String dest){
         Destination destination = destinationRepository.findByDestination(dest).orElseThrow();
@@ -53,6 +55,15 @@ class TripRepositoriesFacade {
 
     List<Trip> getAllTrips(){
         return tripRepository.findAll();
+    }
+
+    Optional<TripDTO> getTripByVoucherNumber(String voucherNumber){
+        try {
+            Trip trip = tripRepository.findByVoucherNumberLike(voucherNumber).orElseThrow(NoSuchElementException::new);
+            return Optional.of(tripMapper.convertEntityToDto(trip));
+        }catch(NoSuchElementException e){
+            return Optional.empty();
+        }
     }
 
     List<TripDTO> getAllTripDtos(){

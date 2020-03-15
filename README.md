@@ -16,17 +16,17 @@ REST<br>
 Service allows users to make reservations for trips, fill form with information about number of people in group, and shows informations about price.
 
 ### REST API<br>
-Below I presemted REST endpoints 
+Below I present REST endpoints 
 Fpr Users:
 * Users
-GET ```/users```<br> : Main endpoint for Users entitiies operation, Returns reposne with collection of objects loaded from database<br>
-GET  ```/users/{username}```<br> Endpoint for user page adninistration - get UserDTO by username, which is unique<br>
-POST ```/users```<br> Cpmsume jsom with UserDTO informations, and transfer it to User Emtoty. If trip aleardy exosts om datanase. them saving object to DB woll not ne performed.
+GET ```/users```<br> : Main endpoint for Users entities operation, Returns response with collection of objects loaded from database<br>
+GET  ```/users/{username}```<br> Endpoint for user page administration - get UserDTO by username, which is unique<br>
+POST ```/users```<br> Consume json with UserDTO information, and transfer it to User Entity. If trip already exists om database. them saving object to DB will not ne performed.
 
 * Trips
-GET ```/trips```<br> : Main endpoint for Trips entitiies operation, Returns reposne with collection of objects loaded from database<br>
-GET  ```/trips/{username}```<br> Endpoint for trip page adninistration - get TripDTO by voucher number, which is unique<br>
-POST ```/trips```<br> Cpmsume jsom with TripDTO informations, and transfer ot tp Tro[. amd mext save om database. of tke sa,e iserma,e is not exists alreadu om data spirce<br>
+GET ```/trips```<br> : Main endpoint for Trips entities operation, Returns response with collection of objects loaded from database<br>
+GET  ```/trips/{username}```<br> Endpoint for trip page administration - get TripDTO by voucher number, which is unique<br>
+POST ```/trips```<br> Consume json with TripDTO information, and transfer it to Trip, amd next save to database, if the same trip entity is not exists already om data source<br>
 
 
 

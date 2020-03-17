@@ -138,12 +138,7 @@ public class TripDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TripDTO tripDTO = (TripDTO) o;
-        return normalTickets == tripDTO.normalTickets &&
-                reducedTickets == tripDTO.reducedTickets &&
-                Double.compare(tripDTO.tripCost, tripCost) == 0 &&
-                Objects.equals(tripDate, tripDTO.tripDate) &&
-                Objects.equals(orderDate, tripDTO.orderDate) &&
-                Objects.equals(personName, tripDTO.personName) &&
+        return Objects.equals(orderDate, tripDTO.orderDate) &&
                 Objects.equals(voucherNumber, tripDTO.voucherNumber);
     }
 

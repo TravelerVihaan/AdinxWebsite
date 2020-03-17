@@ -78,8 +78,6 @@ public class Destination {
         if (o == null || getClass() != o.getClass()) return false;
         Destination that = (Destination) o;
         return id == that.id &&
-                Double.compare(that.normalPrice, normalPrice) == 0 &&
-                Double.compare(that.reducedPrice, reducedPrice) == 0 &&
                 Objects.equals(destination, that.destination);
     }
 

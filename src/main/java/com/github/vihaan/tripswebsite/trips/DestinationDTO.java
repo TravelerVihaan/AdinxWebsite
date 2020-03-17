@@ -71,9 +71,7 @@ public class DestinationDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DestinationDTO that = (DestinationDTO) o;
-        return Double.compare(that.normalPrice, normalPrice) == 0 &&
-                Double.compare(that.reducedPrice, reducedPrice) == 0 &&
-                Objects.equals(destination, that.destination);
+        return Objects.equals(destination, that.destination);
     }
 
     @Override

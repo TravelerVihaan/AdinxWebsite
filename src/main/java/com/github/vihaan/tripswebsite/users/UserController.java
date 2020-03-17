@@ -8,13 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.github.vihaan.tripswebsite.controller.IControllersStrings;
-
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-
-import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping(IControllersStrings.USERS_MAPPING)

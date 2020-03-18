@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-class UserRepositoriesFacade {
+public class UserRepositoriesFacade {
 
     private UserRepository userRepository;
     private RoleRepository roleRepository;
@@ -34,7 +34,7 @@ class UserRepositoriesFacade {
         return roleMapper;
     }
 
-    private IMapper<User, UserDTO> getUserMapper(){
+    IMapper<User, UserDTO> getUserMapper(){
         return userMapper;
     }
 
@@ -55,7 +55,7 @@ class UserRepositoriesFacade {
                 .collect(Collectors.toList());
     }
 
-    Optional<User> getUserByUsername(String username) {
+    public Optional<User> getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 

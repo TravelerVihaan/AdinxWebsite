@@ -1,12 +1,18 @@
 package com.github.vihaan.tripswebsite.trips;
 
 import com.github.vihaan.tripswebsite.mappers.IMapper;
+import com.github.vihaan.tripswebsite.users.User;
+import com.github.vihaan.tripswebsite.users.UserRepositoriesFacade;
 import com.github.vihaan.tripswebsite.validation.IValidation;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,13 +22,16 @@ import java.util.NoSuchElementException;
 public class TripBooking {
 
     private TripRepositoriesFacade tripRepositoriesFacade;
+    private UserRepositoriesFacade userRepositoriesFacade;
     private IValidation<TripDTO> tripValidator;
 
     @Autowired
     public TripBooking(@Qualifier("tripValidation") IValidation<TripDTO>  tripValidator,
-                       TripRepositoriesFacade tripRepositoriesFacade){
+                       TripRepositoriesFacade tripRepositoriesFacade,
+                       UserRepositoriesFacade userRepositoriesFacade){
         this.tripRepositoriesFacade = tripRepositoriesFacade;
         this.tripValidator = tripValidator;
+        this.userRepositoriesFacade = userRepositoriesFacade;
     }
 
     public List<String> executeBooking(TripDTO tripDTO){
@@ -33,19 +42,33 @@ public class TripBooking {
             Trip trip = tripMapper.convertDtoToEntity(tripDTO);
             try {
                 trip.setTripDestination(prepareDestinationEntityToSave(tripDTO));
+                trip.setUser(prepareUserEntityToSave(tripDTO));
             }catch(NoSuchElementException e){
                 errors.clear();
                 errors.add(DESTINATION_ERROR);
                 return errors;
             }
+            trip.setVoucherNumber(generateVoucherNumber(trip));
+            trip.setTripActive(true);
+            trip.setOrderDate(LocalDateTime.now());
             tripRepositoriesFacade.saveTrip(trip);
         }
         return errors;
 
     }
 
+    private String generateVoucherNumber(Trip trip){
+        String tripDestination = trip.getTripDestination().getDestination();
+        String voucherNumber = tripDestination.substring(tripDestination.length()-3);
+        return voucherNumber + LocalDate.now().format(DateTimeFormatter.ofPattern("yy/MM/dd"));
+    }
+
     private Destination prepareDestinationEntityToSave(TripDTO tripDTO){
         return tripRepositoriesFacade.getDestinationByName(tripDTO.getDestination().getDestination()).orElseThrow(NoSuchElementException::new);
+    }
+
+    private User prepareUserEntityToSave(TripDTO tripDTO){
+        return userRepositoriesFacade.getUserByUsername(tripDTO.getUserDTO().getUsername()).orElseThrow(NoSuchElementException::new);
     }
 
     private double calculateTripCost(TripDTO tripDTO){

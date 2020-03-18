@@ -102,6 +102,11 @@ class TripRepositoriesFacade {
         return tripBooking.executeBooking(tripDTO);
     }
 
+    List<String> addNewDestination(DestinationDTO destinationDTO){
+        //TODO
+        return null;
+    }
+
     void saveDestination(Destination destination){
         destinationRepository.save(destination);
     }

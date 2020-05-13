@@ -48,6 +48,8 @@ public class PdfItextGenerator implements FileGenerator<Document>{
             addTicketsInfo(document,tripDTO);
             addPaymentDetails(document,tripDTO);
             addFinalizeInfo(document);
+            document.addTitle("ticket"+tripDTO.getOrderDate().toString()+".pdf");
+
 
         }catch(DocumentException e) {
             LoggerSingleton.getLogger(this.getClass()).warn(e.getMessage());

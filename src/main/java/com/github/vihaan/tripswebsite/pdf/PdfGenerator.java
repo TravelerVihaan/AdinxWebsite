@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * It is not completely implemented yet. Yse PdfItextGenerator instead.
+ */
 @Service
 @Qualifier("pdfBoxGenerator")
 public class PdfGenerator implements FileGenerator<PDDocument>{

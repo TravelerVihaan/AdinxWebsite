@@ -39,7 +39,7 @@ public class TripBooking {
         this.pdfGenerator = pdfGenerator;
     }
 
-    private List<String> executeBooking(TripDTO tripDTO){
+    List<String> executeBooking(TripDTO tripDTO){
         List<String> errors = new ArrayList<>(tripValidator.isValid(tripDTO));
         if(errors.isEmpty()){
             tripDTO.setTripCost(calculateTripCost(tripDTO));

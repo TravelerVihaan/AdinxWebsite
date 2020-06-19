@@ -18,7 +18,7 @@ public class TripFacade {
         this.tripRepositoriesFacade = tripRepositoriesFacade;
     }
 
-    public List<String> errors executeTripBooking(TripDTO tripDTO){
+    public List<String> executeTripBooking(TripDTO tripDTO){
         return tripBookingProcessor.processTripBooking(tripDTO);
     }
 }

@@ -75,4 +75,6 @@ public class UserRepositoriesFacade {
     void saveRole(Role role){
         roleRepository.save(role);
     }
+
+    void deleteUser(User user){userRepository.delete(user);}
 }

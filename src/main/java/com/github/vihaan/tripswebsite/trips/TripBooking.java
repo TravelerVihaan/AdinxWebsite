@@ -1,22 +1,18 @@
 package com.github.vihaan.tripswebsite.trips;
 
 import com.github.vihaan.tripswebsite.mappers.IMapper;
-import com.github.vihaan.tripswebsite.pdf.FileGenerator;
 import com.github.vihaan.tripswebsite.users.User;
 import com.github.vihaan.tripswebsite.users.UserRepositoriesFacade;
 import com.github.vihaan.tripswebsite.validation.IValidation;
-import com.itextpdf.text.Document;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -25,20 +21,18 @@ public class TripBooking {
 
     private TripRepositoriesFacade tripRepositoriesFacade;
     private UserRepositoriesFacade userRepositoriesFacade;
-    private FileGenerator<Document> pdfGenerator;
     private IValidation<TripDTO> tripValidator;
 
     @Autowired
     public TripBooking(@Qualifier("tripValidation") IValidation<TripDTO>  tripValidator,
-                       @Qualifier("pdfItextGenerator") FileGenerator<Document> pdfGenerator,
                        TripRepositoriesFacade tripRepositoriesFacade,
                        UserRepositoriesFacade userRepositoriesFacade){
         this.tripRepositoriesFacade = tripRepositoriesFacade;
         this.tripValidator = tripValidator;
         this.userRepositoriesFacade = userRepositoriesFacade;
-        this.pdfGenerator = pdfGenerator;
     }
 
+    @Transactional
     List<String> executeBooking(TripDTO tripDTO){
         List<String> errors = new ArrayList<>(tripValidator.isValid(tripDTO));
         if(errors.isEmpty()){

@@ -18,9 +18,11 @@ import java.util.Set;
 public class PdfItextGenerator implements FileGenerator<Document>{
 
     @Override
-    public Document generate(TripDTO tripDTO) throws IOException {
+    public Document generate(TripDTO tripDTO) throws DocumentException, IOException{
+
         Document document = new Document(PageSize.A4,20, 20, 20, 20);
-        try {
+
+        try{
             PdfWriter.getInstance(document, new FileOutputStream(getFileName(tripDTO)));
 
             registerFonts();
@@ -49,13 +51,10 @@ public class PdfItextGenerator implements FileGenerator<Document>{
             addPaymentDetails(document,tripDTO);
             addFinalizeInfo(document);
             document.addTitle("ticket"+tripDTO.getVoucherNumber()+".pdf");
-
-
-        }catch(DocumentException e) {
-            LoggerSingleton.getLogger(this.getClass()).warn(e.getMessage());
-            return null;
         }finally{
-            document.close();
+            if(document!=null){
+                document.close();
+            }
         }
         return document;
     }

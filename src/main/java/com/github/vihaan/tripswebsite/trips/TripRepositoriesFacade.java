@@ -1,10 +1,10 @@
 package com.github.vihaan.tripswebsite.trips;
 
 import com.github.vihaan.tripswebsite.mappers.IMapper;
-import com.github.vihaan.tripswebsite.users.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -12,13 +12,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+public
 class TripRepositoriesFacade {
 
     private TripRepository tripRepository;
     private DestinationRepository destinationRepository;
     private IMapper<Trip, TripDTO> tripMapper;
     private IMapper<Destination, DestinationDTO> destinationMapper;
-    private TripBooking tripBooking;
 
     @Autowired
     TripRepositoriesFacade(@Qualifier("destinationMapper") IMapper<Destination, DestinationDTO> destinationMapper,
@@ -30,7 +30,6 @@ class TripRepositoriesFacade {
         this.destinationRepository = destinationRepository;
         this.tripMapper = tripMapper;
         this.destinationMapper = destinationMapper;
-        this.tripBooking = tripBooking;
     }
 
     IMapper<Trip, TripDTO> getTripMapper(){ return tripMapper;}
@@ -94,12 +93,9 @@ class TripRepositoriesFacade {
         return tripMapper.convertEntityToDto(trip);
     }
 
+    @Transactional
     void saveTrip(Trip trip){
         tripRepository.save(trip);
-    }
-
-    List<String> doExecuteTripBooking(TripDTO tripDTO){
-        return tripBooking.executeBooking(tripDTO);
     }
 
     List<String> addNewDestination(DestinationDTO destinationDTO){

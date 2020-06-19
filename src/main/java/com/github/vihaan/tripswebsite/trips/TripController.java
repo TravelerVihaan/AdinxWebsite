@@ -5,22 +5,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping(IControllersStrings.TRIPS_MAPPING)
 public class TripController {
 
+    // TODO delete this
     private TripRepositoriesFacade tripRepositoriesFacade;
+    private TripFacade tripFacade;
 
     @Autowired
-    public TripController(TripRepositoriesFacade tripRepositoriesFacade){
-        this.tripRepositoriesFacade =tripRepositoriesFacade;
+    public TripController(TripRepositoriesFacade tripRepositoriesFacade,
+                          TripFacade tripFacade){
+        this.tripRepositoriesFacade = tripRepositoriesFacade;
+        this.tripFacade = tripFacade;
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -36,7 +38,7 @@ public class TripController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<String>> addTripBooking(@RequestBody TripDTO trip){
-        List<String> errors = tripRepositoriesFacade.doExecuteTripBooking(trip);
+        List<String> errors = tripFacade.executeTripBooking(trip);
         if(errors.isEmpty()) {
             return ResponseEntity.ok(Collections.emptyList());
         }

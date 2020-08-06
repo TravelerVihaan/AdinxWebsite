@@ -3,8 +3,6 @@ package com.github.vihaan.tripswebsite.trips;
 import com.github.vihaan.tripswebsite.httpstatus.HttpStatusEnum;
 import com.github.vihaan.tripswebsite.logging.LoggerSingleton;
 import com.github.vihaan.tripswebsite.pdf.FileGenerator;
-import com.github.vihaan.tripswebsite.trips.TripBooking;
-import com.github.vihaan.tripswebsite.trips.TripDTO;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;

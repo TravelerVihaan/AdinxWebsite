@@ -9,7 +9,7 @@ Junit 5 in tests<br>
 REST<br>
 
 ## Packaging
-``Fat Jar``` by Maven
+```Fat Jar``` by Maven
 
 ### Only backend side
 

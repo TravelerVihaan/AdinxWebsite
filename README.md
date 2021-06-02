@@ -3,7 +3,7 @@ Web service designed for my friend's company
 
 ## Used technology stack
 Spring Boot 2<br>
-Java 13<br>
+Java 16<br>
 MySQL<br>
 Junit 5 in tests<br>
 REST<br>

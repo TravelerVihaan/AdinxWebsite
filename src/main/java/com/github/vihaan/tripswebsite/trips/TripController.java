@@ -15,8 +15,8 @@ import java.util.List;
 public class TripController {
 
     // TODO delete this
-    private TripRepositoriesFacade tripRepositoriesFacade;
-    private TripFacade tripFacade;
+    private final TripRepositoriesFacade tripRepositoriesFacade;
+    private final TripFacade tripFacade;
 
     @Autowired
     public TripController(TripRepositoriesFacade tripRepositoriesFacade,

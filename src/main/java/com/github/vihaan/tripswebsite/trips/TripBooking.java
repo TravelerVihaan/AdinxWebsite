@@ -19,9 +19,9 @@ import java.util.NoSuchElementException;
 @Service
 public class TripBooking {
 
-    private TripRepositoriesFacade tripRepositoriesFacade;
-    private UserRepositoriesFacade userRepositoriesFacade;
-    private IValidation<TripDTO> tripValidator;
+    private final TripRepositoriesFacade tripRepositoriesFacade;
+    private final UserRepositoriesFacade userRepositoriesFacade;
+    private final IValidation<TripDTO> tripValidator;
 
     @Autowired
     public TripBooking(@Qualifier("tripValidation") IValidation<TripDTO>  tripValidator,

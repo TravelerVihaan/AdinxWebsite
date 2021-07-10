@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 public
 class TripRepositoriesFacade {
 
-    private TripRepository tripRepository;
-    private DestinationRepository destinationRepository;
+    private final TripRepository tripRepository;
+    private final DestinationRepository destinationRepository;
     private IMapper<Trip, TripDTO> tripMapper;
     private IMapper<Destination, DestinationDTO> destinationMapper;
 

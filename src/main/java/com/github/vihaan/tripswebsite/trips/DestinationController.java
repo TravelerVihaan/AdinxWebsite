@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping(IControllersStrings.DESTINATIONS_MAPPING)
 public class DestinationController {
 
-    private TripRepositoriesFacade tripRepositoriesFacade;
+    private final TripRepositoriesFacade tripRepositoriesFacade;
 
     @Autowired
     public DestinationController(TripRepositoriesFacade tripRepositoriesFacade){

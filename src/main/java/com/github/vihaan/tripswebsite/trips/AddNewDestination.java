@@ -9,9 +9,9 @@ import com.github.vihaan.tripswebsite.mappers.IMapper;
 @Service
 public class AddNewDestination {
 
-    private DestinationRepository destinationRepository;
-    private IMapper<Destination, DestinationDTO> destinationMapper;
-    private IValidation<DestinationDTO> destinationValidator;
+    private final DestinationRepository destinationRepository;
+    private final IMapper<Destination, DestinationDTO> destinationMapper;
+    private final IValidation<DestinationDTO> destinationValidator;
 
     @Autowired
     public AddNewDestination(@Qualifier("destinationMapper") IMapper destinationMapper,

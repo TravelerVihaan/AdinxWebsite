@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 @Service
 public class AddNewUser {
 
-    private UserRepositoriesFacade userRepositoriesFacade;
-    private IValidation<UserDTO> userValidator;
+    private final UserRepositoriesFacade userRepositoriesFacade;
+    private final IValidation<UserDTO> userValidator;
 
     @Autowired
     public AddNewUser(@Qualifier("userValidation") IValidation<UserDTO> userValidator,

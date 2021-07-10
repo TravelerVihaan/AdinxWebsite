@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Qualifier("destinationMapper")
 public class DestinationMapper implements IMapper<Destination, DestinationDTO>{
 
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     @Autowired
     public DestinationMapper(ModelMapper modelMapper){

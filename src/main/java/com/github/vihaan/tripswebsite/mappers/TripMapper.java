@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Qualifier("tripMapper")
 public class TripMapper implements IMapper<Trip, TripDTO> {
 
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
     private IMapper<Destination, DestinationDTO> destinationMapper;
 
     @Autowired

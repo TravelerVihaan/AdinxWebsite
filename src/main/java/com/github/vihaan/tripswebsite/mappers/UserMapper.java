@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class UserMapper implements IMapper<User, UserDTO> {
 
     private IMapper<Role, RoleDTO> roleMapper;
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     @Autowired
     public UserMapper(@Qualifier("roleMapper") IMapper roleMapper,

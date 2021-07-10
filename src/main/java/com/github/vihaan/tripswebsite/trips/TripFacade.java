@@ -8,8 +8,8 @@ import java.util.List;
 @Service
 public class TripFacade {
 
-    private TripBookingProcessor tripBookingProcessor;
-    private TripRepositoriesFacade tripRepositoriesFacade;
+    private final TripBookingProcessor tripBookingProcessor;
+    private final TripRepositoriesFacade tripRepositoriesFacade;
 
     @Autowired
     public TripFacade(TripBookingProcessor tripBookingProcessor,

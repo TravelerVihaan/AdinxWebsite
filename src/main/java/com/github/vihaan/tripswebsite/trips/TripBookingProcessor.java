@@ -15,8 +15,8 @@ import java.util.List;
 @Service
 public class TripBookingProcessor {
 
-    private FileGenerator<Document> fileGenerator;
-    private TripBooking tripBooking;
+    private final FileGenerator<Document> fileGenerator;
+    private final TripBooking tripBooking;
 
     @Autowired
     public TripBookingProcessor(@Qualifier("pdfItextGenerator")FileGenerator<Document> pdfItextGenerator,

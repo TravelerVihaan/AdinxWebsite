@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class EntityDTOMapper {
 
     @Bean
-    public ModelMapper modelMapper(){
+    public final ModelMapper modelMapper(){
         return new ModelMapper();
     }
 }

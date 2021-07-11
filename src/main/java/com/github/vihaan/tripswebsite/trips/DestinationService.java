@@ -16,7 +16,7 @@ public class DestinationService {
     private IMapper<Destination, DestinationDTO> destinationMapper;
 
     @Autowired
-    public DestinationService(@Qualifier("destinationMapper") IMapper destinationMapper,
+    public DestinationService(@Qualifier("destinationMapper") IMapper<Destination, DestinationDTO> destinationMapper,
                               DestinationRepository destinationRepository){
         this.destinationMapper = destinationMapper;
         this.destinationRepository = destinationRepository;

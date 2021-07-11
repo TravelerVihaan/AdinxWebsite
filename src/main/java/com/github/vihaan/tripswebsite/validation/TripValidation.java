@@ -10,9 +10,9 @@ import java.util.List;
 
 @Service
 @Qualifier("tripValidation")
-public class TripValidation implements IValidation<TripDTO>{
+class TripValidation implements IValidation<TripDTO>{
 
-    private TripRepository tripRepository;
+    private final TripRepository tripRepository;
 
     @Autowired
     public TripValidation(TripRepository tripRepository) {
@@ -21,7 +21,6 @@ public class TripValidation implements IValidation<TripDTO>{
 
     @Override
     public List<String> isValid(TripDTO objectToValidate) {
-        List<String> validationErrors = validatorCheck(objectToValidate);
-        return validationErrors;
+        return validatorCheck(objectToValidate);
     }
 }

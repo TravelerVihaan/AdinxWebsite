@@ -10,9 +10,9 @@ import java.util.List;
 
 @Service
 @Qualifier("destinationValidation")
-public class DestinationValidation implements IValidation<DestinationDTO> {
+class DestinationValidation implements IValidation<DestinationDTO> {
 
-    private DestinationRepository destinationRepository;
+    private final DestinationRepository destinationRepository;
 
     @Autowired
     public DestinationValidation(DestinationRepository destinationRepository){
@@ -22,7 +22,7 @@ public class DestinationValidation implements IValidation<DestinationDTO> {
     public List<String> isValid(DestinationDTO objectToValidate) {
         List<String> validationErrors = validatorCheck(objectToValidate);
         if(checkIfExistAlready(objectToValidate))
-            validationErrors.add(IValidationMessages.DB_CONFLICT);
+            validationErrors.add(DB_CONFLICT);
         return validationErrors;
     }
 

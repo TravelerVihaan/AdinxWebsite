@@ -1,17 +1,14 @@
 package com.github.vihaan.tripswebsite.pdf;
 
-import com.github.vihaan.tripswebsite.logging.LoggerSingleton;
 import com.github.vihaan.tripswebsite.trips.TripDTO;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
-import java.util.Set;
 
 @Service
 @Qualifier("pdfItextGenerator")

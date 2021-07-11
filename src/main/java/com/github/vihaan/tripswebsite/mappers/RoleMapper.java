@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Qualifier("roleMapper")
-public class RoleMapper implements IMapper<Role, RoleDTO>{
+class RoleMapper implements IMapper<Role, RoleDTO>{
 
     @Override
     public RoleDTO convertEntityToDto(Role entity) {

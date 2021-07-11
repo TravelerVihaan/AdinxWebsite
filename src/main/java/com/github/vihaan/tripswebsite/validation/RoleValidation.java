@@ -10,9 +10,9 @@ import java.util.List;
 
 @Service
 @Qualifier("roleValidation")
-public class RoleValidation implements IValidation<RoleDTO>{
+class RoleValidation implements IValidation<RoleDTO> {
 
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
     @Autowired
     public RoleValidation(RoleRepository roleRepository) {
@@ -23,7 +23,7 @@ public class RoleValidation implements IValidation<RoleDTO>{
     public List<String> isValid(RoleDTO objectToValidate) {
         List<String> validationErrors = validatorCheck(objectToValidate);
         if(checkIfExistAlready(objectToValidate))
-            validationErrors.add(IValidationMessages.DB_CONFLICT);
+            validationErrors.add(DB_CONFLICT);
         return validationErrors;
     }
 

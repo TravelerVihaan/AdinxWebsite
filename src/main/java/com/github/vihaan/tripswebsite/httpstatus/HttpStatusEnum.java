@@ -5,8 +5,8 @@ import org.springframework.http.HttpStatus;
 public enum HttpStatusEnum {
     OK(HttpStatus.OK),
     CONFLICT(HttpStatus.CONFLICT),
-    BADREQUEST(HttpStatus.BAD_REQUEST),
-    NOTFOUND(HttpStatus.NOT_FOUND),
+    BAD_REQUEST(HttpStatus.BAD_REQUEST),
+    NOT_FOUND(HttpStatus.NOT_FOUND),
     CREATED(HttpStatus.CREATED);
 
     HttpStatus response;

@@ -10,9 +10,9 @@ import java.util.List;
 
 @Service
 @Qualifier("userValidation")
-public class UserValidation implements IValidation<UserDTO>{
+class UserValidation implements IValidation<UserDTO>{
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public UserValidation(UserRepository userRepository){
@@ -23,7 +23,7 @@ public class UserValidation implements IValidation<UserDTO>{
     public List<String> isValid(UserDTO objectToValidate) {
         List<String> validationErrors = validatorCheck(objectToValidate);
         if(checkIfExistAlready(objectToValidate))
-            validationErrors.add(IValidationMessages.DATES_CONFLICT);
+            validationErrors.add(DATES_CONFLICT);
         return validationErrors;
     }
 

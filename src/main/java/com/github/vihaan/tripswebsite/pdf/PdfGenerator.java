@@ -79,7 +79,7 @@ public class PdfGenerator implements FileGenerator<PDDocument>{
         try{
             closeable.close();
         }catch (IOException e){
-            LoggerSingleton.getLogger(this.getClass()).warn(e.getMessage());
+            .getLogger(this.getClass()).warn(e.getMessage());
         }
     }
 

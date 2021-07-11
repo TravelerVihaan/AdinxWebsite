@@ -14,6 +14,9 @@ public interface IValidation<T> {
     default List<String> validatorCheck(T objectToValidate) {
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         Set<ConstraintViolation<T>> validationErrors = validator.validate(objectToValidate);
-        return validationErrors.stream().map(error -> error.getMessage()).collect(Collectors.toList());
+        return validationErrors.stream().map(ConstraintViolation::getMessage).collect(Collectors.toList());
     }
+
+    String DATES_CONFLICT = "End date have to be after start date.";
+    String DB_CONFLICT = "This object already exists in database.";
 }

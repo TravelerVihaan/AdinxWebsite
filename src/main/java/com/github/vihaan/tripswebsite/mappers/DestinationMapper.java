@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Qualifier("destinationMapper")
-public class DestinationMapper implements IMapper<Destination, DestinationDTO>{
+class DestinationMapper implements IMapper<Destination, DestinationDTO>{
 
     private final ModelMapper modelMapper;
 

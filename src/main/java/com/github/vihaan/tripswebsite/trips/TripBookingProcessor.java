@@ -26,7 +26,7 @@ public class TripBookingProcessor {
     }
 
     // TODO ???
-    List<String> processTripBooking(TripDTO tripDTO) {
+    HttpStatusEnum processTripBooking(TripDTO tripDTO) {
         List<String> errors = tripBooking.executeBooking(tripDTO);
         if(errors.isEmpty()){
             try {

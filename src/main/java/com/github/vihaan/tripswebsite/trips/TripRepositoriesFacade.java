@@ -1,6 +1,8 @@
 package com.github.vihaan.tripswebsite.trips;
 
 import com.github.vihaan.tripswebsite.mappers.IMapper;
+import com.github.vihaan.tripswebsite.trips.destinations.Destination;
+import com.github.vihaan.tripswebsite.trips.destinations.DestinationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -22,10 +24,10 @@ class TripRepositoriesFacade {
 
     @Autowired
     TripRepositoriesFacade(@Qualifier("destinationMapper") IMapper<Destination, DestinationDTO> destinationMapper,
-                                  @Qualifier("tripMapper")IMapper<Trip, TripDTO> tripMapper,
-                                  TripRepository tripRepository,
-                                  DestinationRepository destinationRepository,
-                                  TripBooking tripBooking) {
+                           @Qualifier("tripMapper")IMapper<Trip, TripDTO> tripMapper,
+                           TripRepository tripRepository,
+                           DestinationRepository destinationRepository,
+                           TripBooker tripBooker) {
         this.tripRepository = tripRepository;
         this.destinationRepository = destinationRepository;
         this.tripMapper = tripMapper;

@@ -1,5 +1,6 @@
 package com.github.vihaan.tripswebsite.trips;
 
+import com.github.vihaan.tripswebsite.trips.destinations.Destination;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

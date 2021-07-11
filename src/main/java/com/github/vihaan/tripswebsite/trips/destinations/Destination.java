@@ -1,37 +1,45 @@
-package com.github.vihaan.tripswebsite.trips;
+package com.github.vihaan.tripswebsite.trips.destinations;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
+import com.github.vihaan.tripswebsite.trips.Trip;
+
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
-public class DestinationDTO {
+@Entity
+@Table(name = "destination")
+public class Destination {
 
-    @NotEmpty(message = "{destination.empty.dest}")
+    @Id
+    @Column(name = "id_destination")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(unique = true, nullable = false)
     private String destination;
 
-    @NotNull
-    @PositiveOrZero(message = "{destination.wrong.price}")
+    @Column(name = "normal_price", nullable = false)
     private double normalPrice;
 
-    @NotNull
-    @PositiveOrZero(message = "{destination.wrong.price}")
+    @Column(name = "reduced_price", nullable = false)
     private double reducedPrice;
 
-    private List<TripDTO> trips;
+    @OneToMany(mappedBy= "tripDestination")
+    private List<Trip> trips;
 
-    public DestinationDTO(){}
-    public DestinationDTO(@NotEmpty String destination,
-                          @NotNull @PositiveOrZero double normalPrice,
-                          @NotNull @PositiveOrZero double reducedPrice) {
+    public Destination(){}
+    public Destination(String destination, double normalPrice, double reducedPrice){
         this.destination = destination;
         this.normalPrice = normalPrice;
         this.reducedPrice = reducedPrice;
     }
 
-    public DestinationDTO(@NotEmpty String destination) {
-        this.destination = destination;
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getDestination() {
@@ -58,11 +66,11 @@ public class DestinationDTO {
         this.reducedPrice = reducedPrice;
     }
 
-    public List<TripDTO> getTrips() {
+    public List<Trip> getTrips() {
         return trips;
     }
 
-    public void setTrips(List<TripDTO> trips) {
+    public void setTrips(List<Trip> trips) {
         this.trips = trips;
     }
 
@@ -70,19 +78,21 @@ public class DestinationDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DestinationDTO that = (DestinationDTO) o;
-        return Objects.equals(destination, that.destination);
+        Destination that = (Destination) o;
+        return id == that.id &&
+                Objects.equals(destination, that.destination);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(destination, normalPrice, reducedPrice);
+        return Objects.hash(id, destination, normalPrice, reducedPrice);
     }
 
     @Override
     public String toString() {
-        return "DestinationDTO{" +
-                "destination='" + destination + '\'' +
+        return "Destination{" +
+                "id=" + id +
+                ", destination='" + destination + '\'' +
                 ", normalPrice=" + normalPrice +
                 ", reducedPrice=" + reducedPrice +
                 '}';

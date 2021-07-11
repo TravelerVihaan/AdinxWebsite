@@ -1,6 +1,6 @@
 package com.github.vihaan.tripswebsite.validation;
 
-import com.github.vihaan.tripswebsite.trips.DestinationDTO;
+import com.github.vihaan.tripswebsite.trips.destinations.DestinationDTO;
 import com.github.vihaan.tripswebsite.trips.DestinationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

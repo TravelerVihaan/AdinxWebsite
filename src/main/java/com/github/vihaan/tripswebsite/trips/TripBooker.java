@@ -1,6 +1,7 @@
 package com.github.vihaan.tripswebsite.trips;
 
 import com.github.vihaan.tripswebsite.mappers.IMapper;
+import com.github.vihaan.tripswebsite.trips.destinations.Destination;
 import com.github.vihaan.tripswebsite.users.User;
 import com.github.vihaan.tripswebsite.users.UserRepositoriesFacade;
 import com.github.vihaan.tripswebsite.validation.IValidation;
@@ -17,16 +18,16 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-public class TripBooking {
+public class TripBooker {
 
     private final TripRepositoriesFacade tripRepositoriesFacade;
     private final UserRepositoriesFacade userRepositoriesFacade;
     private final IValidation<TripDTO> tripValidator;
 
     @Autowired
-    public TripBooking(@Qualifier("tripValidation") IValidation<TripDTO>  tripValidator,
-                       TripRepositoriesFacade tripRepositoriesFacade,
-                       UserRepositoriesFacade userRepositoriesFacade){
+    public TripBooker(@Qualifier("tripValidation") IValidation<TripDTO>  tripValidator,
+                      TripRepositoriesFacade tripRepositoriesFacade,
+                      UserRepositoriesFacade userRepositoriesFacade){
         this.tripRepositoriesFacade = tripRepositoriesFacade;
         this.tripValidator = tripValidator;
         this.userRepositoriesFacade = userRepositoriesFacade;

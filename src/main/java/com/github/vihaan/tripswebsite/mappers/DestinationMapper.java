@@ -1,7 +1,7 @@
 package com.github.vihaan.tripswebsite.mappers;
 
-import com.github.vihaan.tripswebsite.trips.Destination;
-import com.github.vihaan.tripswebsite.trips.DestinationDTO;
+import com.github.vihaan.tripswebsite.trips.destinations.Destination;
+import com.github.vihaan.tripswebsite.trips.destinations.DestinationDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

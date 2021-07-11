@@ -1,9 +1,9 @@
 package com.github.vihaan.tripswebsite.trips;
 
+import com.github.vihaan.tripswebsite.trips.destinations.Destination;
 import com.github.vihaan.tripswebsite.users.User;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 

@@ -1,7 +1,7 @@
-package com.github.vihaan.tripswebsite.trips;
+package com.github.vihaan.tripswebsite.trips.destinations;
 
 import com.github.vihaan.tripswebsite.controller.IControllersStrings;
-import com.github.vihaan.tripswebsite.users.UserDTO;
+import com.github.vihaan.tripswebsite.trips.TripRepositoriesFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

@@ -1,10 +1,9 @@
 package com.github.vihaan.tripswebsite.trips;
 
+import com.github.vihaan.tripswebsite.trips.destinations.DestinationDTO;
 import com.github.vihaan.tripswebsite.users.UserDTO;
-import org.apache.tomcat.jni.Local;
 
 import javax.validation.constraints.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 

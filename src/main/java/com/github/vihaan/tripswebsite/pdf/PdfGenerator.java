@@ -1,5 +1,6 @@
 package com.github.vihaan.tripswebsite.pdf;
 
+import com.github.vihaan.tripswebsite.trips.TripBookingProcessor;
 import com.github.vihaan.tripswebsite.trips.TripDTO;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -7,6 +8,8 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDTrueTypeFont;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -67,7 +70,7 @@ public class PdfGenerator implements FileGenerator<PDDocument>{
             contentStream.close();
             document.save(IFileConstants.TMP_FILE_PATH);
         }catch(IOException e){
-            LoggerSingleton.getLogger(this.getClass()).warn(e.getMessage());
+            LOGGER.warn(e.getMessage());
         }finally{
             closeStream(contentStream);
         }
@@ -79,7 +82,7 @@ public class PdfGenerator implements FileGenerator<PDDocument>{
         try{
             closeable.close();
         }catch (IOException e){
-            .getLogger(this.getClass()).warn(e.getMessage());
+            LOGGER.warn(e.getMessage());
         }
     }
 
@@ -90,10 +93,10 @@ public class PdfGenerator implements FileGenerator<PDDocument>{
             fonts.put(IFileConstants.MONTSERRAT_FONT, PDTrueTypeFont.loadTTF(document, new File(IFileConstants.MONTSERRAT_FONT_PATH)));
             fonts.put(IFileConstants.OPENSANS_FONT, PDTrueTypeFont.loadTTF(document, new File(IFileConstants.OPENSANS_FONT_PATH)));
         }catch(IOException e){
-            LoggerSingleton.getLogger(this.getClass()).warn(e.getMessage());
+            LOGGER.warn(e.getMessage());
         }
         return fonts;
     }
 
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(PdfGenerator.class);
 }

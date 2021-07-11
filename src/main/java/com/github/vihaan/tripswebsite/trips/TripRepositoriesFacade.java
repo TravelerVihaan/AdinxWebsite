@@ -41,7 +41,7 @@ class TripRepositoriesFacade {
         return destinationRepository.findAll();
     }
 
-    List<DestinationDTO> getAllDestinationDtos(){
+    public List<DestinationDTO> getAllDestinationDtos(){
         return destinationRepository.findAll()
                 .stream()
                 .map(destination -> destinationMapper.convertEntityToDto(destination))
@@ -61,7 +61,7 @@ class TripRepositoriesFacade {
         }
     }
 
-    Optional<DestinationDTO> getDestinationDtoByName(String destinationName){
+    public Optional<DestinationDTO> getDestinationDtoByName(String destinationName){
           try {
                 Destination destination = destinationRepository.findByDestination(destinationName).orElseThrow(NoSuchElementException::new);
                 return Optional.of(destinationMapper.convertEntityToDto(destination));
@@ -100,7 +100,7 @@ class TripRepositoriesFacade {
         tripRepository.save(trip);
     }
 
-    List<String> addNewDestination(DestinationDTO destinationDTO){
+    public List<String> addNewDestination(DestinationDTO destinationDTO){
         //TODO
         return null;
     }

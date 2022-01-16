@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.0</version>
+        <version>2.6.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.github.vihaan</groupId>
@@ -15,7 +15,7 @@
     <description>Web service for booking trips</description>
     <packaging>jar</packaging>
     <properties>
-        <java.version>16</java.version>
+        <java.version>17</java.version>
     </properties>
 
     <dependencies>
@@ -88,7 +88,7 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>1.4.199</version>
+            <version>2.0.206</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

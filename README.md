@@ -3,9 +3,11 @@ Web service designed for my friend's company
 
 ## Used technology stack
 Spring Boot 2<br>
-Java 16<br>
+Java 17<br>
 MySQL<br>
 Junit 5 in tests<br>
+Mockito 4 in tests<br>
+Maven<br>
 REST<br>
 
 ## Packaging
